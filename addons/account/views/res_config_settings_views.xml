@@ -359,6 +359,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-12 col-lg-6 o_setting_box" title="Once installed, set 'Bank Feeds' to 'File Import' in bank account settings.This adds a button to import from the Accounting dashboard.">
                                     <div class="o_setting_left_pane">
                                         <field name="module_account_bank_statement_import_camt" widget="upgrade_boolean"/>
