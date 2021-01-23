@@ -23,15 +23,15 @@
     "post_init_hook": None,
     "uninstall_hook": None,
     "auto_install": False,
-    "installable": False,
-    # "demo_title": "Creation of Postponed invoices in POS",
-    # "demo_addons": [
-    # ],
-    # "demo_addons_hidden": [
-    # ],
-    # "demo_url": "DEMO-URL",
-    # "demo_summary": "This module allows the usage of a regular POS order payment process to create an invoice to be paid later",
-    # "demo_images": [
-    #    "images/MAIN_IMAGE",
-    # ]
+    "installable": True,
+     "demo_title": "Creation of Postponed invoices in POS",
+     "demo_addons": [
+     ],
+     "demo_addons_hidden": [
+     ],
+     "demo_url": "DEMO-URL",
+     "demo_summary": "This module allows the usage of a regular POS order payment process to create an invoice to be paid later",
+     "demo_images": [
+        "images/MAIN_IMAGE",
+     ]
 }
