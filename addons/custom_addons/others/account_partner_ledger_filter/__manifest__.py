@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Partner Ledger with Partner Filter',
-    'version': '11.0.1.0',
+    'version': '12.0.0.0',
     'summary': """Partner Ledger Report with Partner Filter""",
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
