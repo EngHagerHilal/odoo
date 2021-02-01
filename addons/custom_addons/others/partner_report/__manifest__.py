@@ -16,6 +16,7 @@
 		
 		"views/partner_report.xml",
 		"views/report_partner_cash.xml",
+        "views/report_employee_cash.xml"
 		
              ],
     'demo': [],
