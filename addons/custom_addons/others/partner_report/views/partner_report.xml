@@ -6,8 +6,8 @@
             string="Cash Reciept"
             model="res.partner" 
             report_type="qweb-pdf"
-            file="partner_employee_report.cash_reciept_report" 
-            name="partner_employee_report.cash_reciept_report" 
+            file="partner_report.cash_reciept_report" 
+            name="partner_report.cash_reciept_report" 
         />
     </data>
 </odoo>
