@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-                <template id="cash_reciept_report">
+                <template id="partner_report.cash_reciept_report">
                     <t t-if="o and 'company_id' in o">
                         <t t-set="company" t-value="o.company_id"></t>
                         <span>
