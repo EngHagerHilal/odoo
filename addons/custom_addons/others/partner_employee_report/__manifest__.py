@@ -13,7 +13,7 @@
     'author': 'Leen',
     'depends': ['base', 'account' ,'base_vat' , 'hr'],
     'data': [
-		
+		"views/employee_report.xml",
 		"views/partner_report.xml",
 		"views/report_partner_cash.xml",
         "views/report_employee_cash.xml",
