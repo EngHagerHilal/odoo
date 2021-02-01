@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
                 <template id="partner_report.cash_reciept_report">
                     <t t-if="o and 'company_id' in o">
                         <t t-set="company" t-value="o.company_id"></t>

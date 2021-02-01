@@ -6,7 +6,3 @@ from odoo import models, fields, api, _
 class res_partner(models.Model):
     _inherit = "res.partner"
 
-    @api.multi
-    def print_partner(self):
-        return self.env.ref('partner_report.cash_reciept_report').report_action(self)
-
