@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<data>
     <template id="partner_receipt_pdf">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
@@ -17,4 +18,5 @@
             </t>
         </t>
     </template>
+</data>
 </odoo>
