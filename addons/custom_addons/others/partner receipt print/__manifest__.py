@@ -30,5 +30,4 @@
     'installable': True,
     'auto_install': False,
     'application': False,
-    'live_test_url':'https://youtu.be/5OqXXKO6gRA',
 }
