@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="partner_receipt_wizard_report" model="ir.ui.view">
+        <field name="name">partner.receipt.wizard.report</field>
+        <field name="model">partner.receipt</field>
+        <field name="arch" type="xml">
+            <form string="Partner Receipt">
+                <group>
+                    <group>
+                        
+                        <field name="partner_id"/>
+
+                    </group>
+                    
+                </group>
+
+                <footer>
+                    <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_partner_receipt_wizard" model="ir.actions.act_window">
+        <field name="name">Partner Receipt</field>
+        <field name="res_model">partner.receipt</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_partner_receipt_report" name="Partner Receipt" parent="account.account_reports_management_menu" action="action_partner_receipt_wizard" sequence="150" />
+</odoo>

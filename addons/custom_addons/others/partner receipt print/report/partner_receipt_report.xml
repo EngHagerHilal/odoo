@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="partner_receipt_pdf"
+            string="Partner Receipt"
+            model="partner.receipt"
+            report_type="qweb-pdf"
+            file="partner_receipt_report.partner_receipt_pdf"
+            name="partner_receipt_report.partner_receipt_pdf" />
+</odoo>
