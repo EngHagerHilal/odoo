@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <report id="partner_receipt"
+    <report id="partner_receipt_pdf"
             string="Partner Receipt"
             model="partner.receipt"
             report_type="qweb-pdf"

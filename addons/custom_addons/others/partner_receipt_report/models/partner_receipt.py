@@ -16,7 +16,6 @@ class PartnerReceipt(models.TransientModel):
 
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
     
-
     @api.multi
     def print_report(self, data):
         data = {'partner_id': self.partner_id.id }
