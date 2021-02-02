@@ -6,7 +6,7 @@
 #
 ##############################################################################
 {
-    'name': 'Partner Receipt Report',
+    'name': 'partner_receipt_report',
     'version': '1.1',
     'summary': 'This module will Print receit to the partner',
     'description': 'This module provides the movement of individual products with opening and closing stocks',
