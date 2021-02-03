@@ -15,7 +15,7 @@ class PartnerReceipt(models.TransientModel):
     _name = 'partner.receipt'
     
     date = fields.Date(string='Date', required=True)
-    amount = fields.Manatory(string='Amount', required=True)
+    amount = fields.Monetary(string='Amount', required=True)
 
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
     

@@ -14,9 +14,8 @@
                     </t>
                     <span t-esc="date" />
                     <span t-esc="amount"/>
-                     </div>
+                    </div>
                 </div>
-                    
             </t>
         </t>
     </template>
