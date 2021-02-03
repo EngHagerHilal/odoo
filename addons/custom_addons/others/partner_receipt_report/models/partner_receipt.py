@@ -15,11 +15,10 @@ class PartnerReceipt(models.TransientModel):
     _name = 'partner.receipt'
     
     date = fields.Date(string='Date', required=True)
-    amount = fields.Monetary(string='Amount', required=True)
 
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
     
     @api.multi
     def print_report(self, data):
-        data = {'partner_id': self.partner_id.id ,'date': self.date, 'amount': self.amount }
+        data = {'partner_id': self.partner_id.id ,'date': self.date }
         return self.env.ref('partner_receipt_report.partner_receipt').report_action(self, data=data)

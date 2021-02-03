@@ -13,7 +13,6 @@
                         <h4><span t-field="prd.name"/></h4>
                     </t>
                     <span t-esc="date" />
-                    <span t-esc="amount"/>
                     </div>
                 </div>
             </t>

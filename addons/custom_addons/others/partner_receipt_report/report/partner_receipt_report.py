@@ -18,7 +18,6 @@ class CustomReport(models.AbstractModel):
     def _get_report_values(self,docids,data=None):
         
         date = data['date']
-        amount = data['amount']
         partner = data['partner_id']
         return {
             'doc_ids': self.ids,
@@ -26,6 +25,5 @@ class CustomReport(models.AbstractModel):
             'data': data,
             'date': date ,
             'docs': docs ,
-            'amount' : amount,
-             'partner' : partner
+            'partner' : partner
     }
