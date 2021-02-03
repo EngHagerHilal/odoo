@@ -13,10 +13,13 @@ from odoo import fields,api,models
 class PartnerReceipt(models.TransientModel):
 
     _name = 'partner.receipt'
+    
+    date = fields.Date(string='Date', required=True)
+    amount = fields.Manatory(string='Amount', required=True)
 
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
     
     @api.multi
     def print_report(self, data):
-        data = {'partner_id': self.partner_id.id }
+        data = {'partner_id': self.partner_id.id ,'date': self.date, 'amount': self.amount }
         return self.env.ref('partner_receipt_report.partner_receipt').report_action(self, data=data)
