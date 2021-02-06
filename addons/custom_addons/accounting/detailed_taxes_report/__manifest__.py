@@ -19,7 +19,7 @@
 		],
     'category': 'Accounting',
     'demo': [],
-    'data': ['views/detailed_tex_views.xml',
+    'data': ['views/detailed_tax_views.xml',
              'security/ir.model.access.csv',
              'report/detailed_tax_report_template.xml',
              'report/detailed_tax_report.xml'],
