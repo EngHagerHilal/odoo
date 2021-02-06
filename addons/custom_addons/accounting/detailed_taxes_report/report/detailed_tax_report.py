@@ -66,9 +66,5 @@ class CustomReport(models.AbstractModel):
             'date_start': date_start,
             'date_end': date_end,
             'docs': docs,
-            'in' : total_in ,
-            'out' : total_out ,
-            'total_in' : amount_total_in ,
-            'total_out' : amount_total_out
         }
 
