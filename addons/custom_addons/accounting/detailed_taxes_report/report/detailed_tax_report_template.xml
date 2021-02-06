@@ -8,23 +8,6 @@
                     <div class="oe_structure"/>
                     <div class="text-left">
                     <h3 class="text-center"> Detailed Tax Invoice  </h3>
-                    <!--<span t-esc="data['product_id']"/>-->
-                    <t t-foreach="in" t-as="invoice">
-                        <span t-field="invoice.amount_total"/>
-                        <span t-field="invoice.amount_tax"/>
-                        <span t-field="invoice.partner_id.name"/>
-
-                    </t>
-                    <div t-field="total_in" />
-                    </br>
-                    </br>
-                    <t t-foreach="out" t-as="invoice">
-                        <span t-field="invoice.amount_total"/>
-                        <span t-field="invoice.amount_tax"/>
-                        <span t-field="invoice.partner_id.name"/>
-
-                    </t>
-                    <div t-field="total_out" />
                     </div>
 
                 </div>

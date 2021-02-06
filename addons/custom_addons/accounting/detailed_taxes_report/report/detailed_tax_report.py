@@ -13,7 +13,7 @@ from odoo.exceptions import ValidationError, Warning
 
 
 class CustomReport(models.AbstractModel):
-    _name = 'report.detailed_taxes_report.detailed_taxes_report'
+    _name = 'detailed_taxes_report.detailed_taxes_report'
 
    @api.model
     def _get_report_values(self, docids, data=None):

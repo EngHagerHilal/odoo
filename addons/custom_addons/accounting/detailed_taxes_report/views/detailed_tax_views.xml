@@ -24,9 +24,6 @@
     </field>
 </record>
 
-
-
-
     <record id="action_detailed_tax_report_wizard" model="ir.actions.act_window">
         <field name="name">Detailed Tax Report</field>
         <field name="res_model">account.taxes.details</field>
