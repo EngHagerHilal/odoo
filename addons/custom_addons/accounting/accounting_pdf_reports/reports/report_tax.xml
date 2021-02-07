@@ -7,11 +7,17 @@
                     <h3> Tax Report</h3>
                     <div class="row">
                         <div class="col-4">
-                            <t t-if="data['date_from']"><strong>From</strong> <span t-esc="data['date_from']"/><br/></t>
+                            <!--<t t-if="data['date_from']"><strong>From</strong> <span t-esc="data['date_from']"/><br/></t>
                             <t t-if="data['date_to']"><strong>to </strong><span t-esc="data['date_to']"/></t>
-                        </div>
+                        !--></div>
                     </div>
-                    <table class="table table-sm table-reports">
+                    <t t-if="total_in" >
+                    <span t-field="total_in" />
+                    </t>
+                    <t t-if="total_out" >
+                    <span t-field="total_out" />
+                    </t> 
+                    <!--<table class="table table-sm table-reports">
                         <thead>
                             <tr class="text-center">
                                 <th>Sale</th>
@@ -31,7 +37,7 @@
                             <td><span t-att-style="style" t-esc="line.get('net')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
                             <td><span t-att-style="style" t-esc="line.get('tax')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
                         </tr>
-                    </table>
+                    </table>!-->
                 </div>
             </t>
         </t>
