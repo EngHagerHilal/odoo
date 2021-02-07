@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<record id="detailed_tax_report_wizard" model="ir.ui.view" >
+    <field name="name">Detailed Tax Report</field>
+    <field name="model">account.taxes.details</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Detailed Tax Report">
+            <group>
+                <group>
+                    <field name="date_start"/>
+                </group>
+                <group>
+                    <field name="date_end"/>
+                </group>
+            </group>
+            <footer>
+                <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                <button string="Cancel" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+    <record id="action_detailed_tax_report_wizard" model="ir.actions.act_window">
+        <field name="name">Detailed Tax Report</field>
+        <field name="res_model">account.taxes.details</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="menu_detailed_tax_report" name="Detailed Tax Report" parent="account.account_reports_management_menu" action="action_detailed_tax_report_wizard" sequence="150" />
+
+</odoo>
