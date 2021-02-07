@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <report id="detailed_taxes"
-            string="Detailed tax report"
-            model="account.taxes.details"
-            report_type="qweb-pdf"
-            file="report.detailed_taxes_report.detailed_taxes_report"
-            name="report.detailed_taxes_report.detailed_taxes_report" />
-</odoo>
