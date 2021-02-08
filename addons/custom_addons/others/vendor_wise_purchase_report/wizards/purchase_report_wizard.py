@@ -43,7 +43,8 @@ class PurchaseReportVendor(models.TransientModel):
             'model': 'vendor.purchase.report.wizard',
             'form': final_dist,
             'start_date': self.start_date,
-            'end_date': self.end_date
+            'end_date': self.end_date ,
+            'vendors' : self.vendor_ids
         }
 
         print('datas:', datas)
