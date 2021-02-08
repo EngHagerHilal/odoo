@@ -24,10 +24,8 @@ class PurchaseReportVendor(models.TransientModel):
             purchase_order_groupby_dict[vendor.name] = filtered_by_state
 
         final_dist = {}
-        final_objs = {}
         for vendor in purchase_order_groupby_dict.keys():
             purchase_data = []
-            vendor_obj = []
             for order in purchase_order_groupby_dict[vendor]:
 
                 order_state = self.get_state_display_value(order.state)
@@ -35,22 +33,19 @@ class PurchaseReportVendor(models.TransientModel):
                 temp_data = []
                 temp_data.append(order.name)
                 temp_data.append(order.date_order)
-                temp_data.append(order.partner_id.x_balance)
+                temp_data.append(order.x_balance)
                 temp_data.append(order_state)
                 temp_data.append(order.amount_total)
+                temp_data.append(order.partner_id)
                 purchase_data.append(temp_data)
-                vendor_obj.append(order)
 
             final_dist[vendor] = purchase_data
-            final_objs[vendor] = vendor_obj
         datas = {
             'ids': self,
             'model': 'vendor.purchase.report.wizard',
             'form': final_dist,
-            'final' : final_objs ,
             'start_date': self.start_date,
             'end_date': self.end_date ,
-            'vendors' : self.vendor_ids
         }
 
         print('datas:', datas)
