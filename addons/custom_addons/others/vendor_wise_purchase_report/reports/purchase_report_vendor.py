@@ -11,5 +11,5 @@ class PurchaseReportVendor(models.AbstractModel):
             'data': data['form'],
             'start_date': data['start_date'],
             'end_date': data['end_date'],
-            'vendors' : data.get['vendors']
+            'vendors' : data['vendors'],
         }
