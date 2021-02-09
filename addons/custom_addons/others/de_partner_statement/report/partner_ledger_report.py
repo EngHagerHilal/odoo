@@ -31,7 +31,7 @@ where a.reconcile = True
 
         cr = self._cr
         query = """
-        select m.ref,m.name as doc_no, m.date, m.narration, j.name as journal, j.invoice_id as invoice, p.name as partner_name, 
+        select m.ref,m.name as doc_no, m.date, m.narration, j.name as journal, j as journal_obj, p.name as partner_name, 
 l.name as line_desc, a.name as gl_account, m.currency_id, l.debit, l.credit
 from account_move_line l
 join account_move m on l.move_id = m.id
