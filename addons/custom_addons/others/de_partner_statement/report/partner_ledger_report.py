@@ -31,10 +31,11 @@ where a.reconcile = True
 
         cr = self._cr
         query = """
-        select m.ref,m.name as doc_no, m.date, m.narration, j.name as journal, p.name as partner_name, 
+        select m.ref,m.name as doc_no, m.date, m.narration, j.name as journal, invoice as invoice, p.name as partner_name, 
 l.name as line_desc, a.name as gl_account, m.currency_id, l.debit, l.credit
 from account_move_line l
 join account_move m on l.move_id = m.id
+join invoice i on l.invoice_id = i.id 
 join res_partner p on l.partner_id = p.id
 join account_account a on l.account_id = a.id
 join account_journal j on m.journal_id = j.id
