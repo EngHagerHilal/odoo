@@ -40,8 +40,6 @@ join account_account a on l.account_id = a.id
 join account_journal j on m.journal_id = j.id
 where a.reconcile = True
         and l.partner_id = %s and (m.date between %s and %s)
-        and m.journal_id.invoice_id.refund_invoice_id = null 
-        and m.journal_id.invoice_id.refund_invoice_ids = null
         order by m.date
         """ 
         cr.execute(query, [data['partner_id'],data['start_date'],data['end_date']])
