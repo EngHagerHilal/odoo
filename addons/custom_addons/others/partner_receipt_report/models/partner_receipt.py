@@ -20,5 +20,5 @@ class PartnerReceipt(models.TransientModel):
     
     @api.multi
     def print_report(self, data):
-        data = {'partner_id': self.partner_id.id ,'date': self.date }
+        data = {'partner_id': self.partner_id ,'date': self.date }
         return self.env.ref('partner_receipt_report.partner_receipt').report_action(self, data=data)
