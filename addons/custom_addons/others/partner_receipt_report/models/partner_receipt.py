@@ -15,10 +15,8 @@ class PartnerReceipt(models.TransientModel):
     _name = 'partner.receipt'
     
     date = fields.Date(string='Date', required=True)
-    
     from_account = fields.Many2one('account.account', string='From Account', required=True)
     to_account = fields.Many2one('account.account', string='To Account', required=True)
-
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
     amount = fields.Float(string='Amount', default=0.0)
     

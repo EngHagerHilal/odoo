@@ -15,7 +15,12 @@ from odoo.exceptions import ValidationError, Warning
 class CustomReport(models.TransientModel):
     _name = "partner_receipt_report.partner_receipt_pdf"
 
-    def _get_report_values(self,docids,data=None):       
+    def _get_report_values(self,docids,data=None):  
+        data['date'] = data['date']
+        data['partner'] = data['partner_id']
+        data['amount'] = data['amount']
+        data['from'] = data['from']
+        data['to'] = data['to']
         return {
             'doc_ids': self.ids,
              docs : docids ,
