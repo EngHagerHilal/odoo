@@ -12,7 +12,7 @@
                     <t t-foreach="request.env['res.partner'].search([('id', '=', data['partner_id'])])" t-as="prd">
                         <h4><span t-field="prd.name"/></h4>
                     </t>
-                    <span t-esc="date" />
+                    <span t-esc="data['date']" />
                     </div>
                 </div>
             </t>
