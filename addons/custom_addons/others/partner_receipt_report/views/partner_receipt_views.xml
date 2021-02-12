@@ -7,7 +7,19 @@
         <field name="arch" type="xml">
             <form string="Partner Receipt">
                 <group>
+                
+                <group>
+                    <field name="date"/>
+                </group>
+                <group>
                     <field name="partner_id"/>
+                    <field name="amount"/>
+                </group>
+                
+                <group>
+                    <field name="from_account"/>
+                    <field name="to_account"/>
+                </group>
                 </group>
                 <footer>
                     <button name="print_report" type="object" string="Print" class="oe_highlight"/>
