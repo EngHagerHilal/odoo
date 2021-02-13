@@ -28,10 +28,10 @@ class CustomReport(models.TransientModel):
             'doc_model': 'partner.receipt',
             'data': data,
             'date' : data['date'],
-            'date' = data['date'],
-            'partner' = data['partner_id'],
-            'amount' = data['amount'],
-            'from' = data['from'],
-            'to' = data['to'],
+            'date' : data['date'],
+            'partner' : data['partner_id'],
+            'amount' : data['amount'],
+            'from' : data['from'],
+            'to' : data['to'],
             'dat' : data
         }
