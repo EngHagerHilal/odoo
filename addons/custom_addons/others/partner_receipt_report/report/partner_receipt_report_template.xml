@@ -9,10 +9,14 @@
                     <div class="text-left">
                     <h3 class="text-center"> سند صرف  </h3>
                     <!--<span t-esc="data['product_id']"/>-->
-                    <t t-foreach="request.env['res.partner'].search([('id', '=', data['partner_id'])])" t-as="prd">
+                    <!--<t t-foreach="request.env['res.partner'].search([('id', '=', data['partner_id'])])" t-as="prd">
                         <h4><span t-field="prd.name"/></h4>
-                    </t>
-                    <span t-esc="data['date']" />
+                    </t>-->
+                    <span t-esc="date" />
+                    <span t-esc="partner.name" />
+                    <span t-esc="from" />
+                    <span t-esc="to" />
+                    <span t-esc="amount" />
                     </div>
                 </div>
             </t>
