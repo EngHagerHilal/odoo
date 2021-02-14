@@ -13,7 +13,7 @@
     'author': 'Leen',
     'maintainer': 'Leen',
     'company': 'Leen',
-    'website': 'https://www.leen.com',
+    'website': 'https://www.leen.com.eg',
     'depends': [
 		'base'
 		],
