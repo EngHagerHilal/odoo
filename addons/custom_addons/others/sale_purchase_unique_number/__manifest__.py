@@ -1,14 +1,29 @@
-# See LICENSE file for full copyright and licensing details.
-
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    Odoo, Open Source Management Solution
+#    Copyright (C) 2015 Dynexcel (<http://dynexcel.com/>).
+#
+##############################################################################
 {
     'name': 'sale_purchase_unique_number',
-    'version': '12.0.1.0.0',
-    'author': 'Leen Company'
-    'maintainer': 'Leen Company',
-    'summary': 'Set unique number for sale order and purchase order',
+    'version': '1.1',
+    'summary': 'This module will allow you ro add unique number to every sale / purchase order',
+    'description': 'This module provides the movement of individual products with opening and closing stocks',
+    'author': 'Leen',
+    'maintainer': 'Leen',
+    'company': 'Leen',
+    'website': 'https://www.leen.com',
     'depends': [
-        'sale'
-    ],
+		'base'
+		],
+    'category': 'Sale',
+    'demo': [],
+    'installable': True,
+    'images': ['static/description/icon.png'],
+    'qweb': [],
+    'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
+    'application': False,
 }
