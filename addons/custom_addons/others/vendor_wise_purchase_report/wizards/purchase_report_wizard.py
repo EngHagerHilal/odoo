@@ -42,7 +42,6 @@ class PurchaseReportVendor(models.TransientModel):
                 temp_data.append(order.x_driver)
                 temp_data.append(order.x_car_number)
                 temp_data.append(order.x_paid_driver)
-                temp_data.append(order)
                 purchase_data.append(temp_data)
 
             final_dist[vendor] = purchase_data
