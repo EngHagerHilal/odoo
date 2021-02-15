@@ -15,7 +15,7 @@
     'company': 'Leen',
     'website': 'https://www.leen.com.eg',
     'depends': [
-		'base'
+		'base' , 'purchase' , 'sale'
 		],
     'category': 'Sale',
     'demo': [],
