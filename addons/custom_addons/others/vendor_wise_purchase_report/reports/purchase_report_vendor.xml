@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_report_vendor">
+       <t t-call="web.html_container">
+              
+
+                <style>
+                    .table, .table td, .table th {
+                      border: 1px solid #ddd;
+                      text-align: left;
+                    }
+
+                    .table {
+                      border-collapse: collapse;
+                      width: 100%;
+                    }
+
+                    .table th, .table td {
+                      padding: 10px;
+                    }
+
+                    .salesperson{
+                        padding: 50px
+                    }
+                </style>
+             <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+               
+            </t>
+            
+            <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 50px;"/>
+                    </div>
+                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <span t-field="company.partner_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.street"/>
+                        <br/>
+                        <span t-field="company.partner_id.street2"/>
+                        <br/>
+                        <span t-field="company.partner_id.city"/>
+                        <br/>
+                        <span t-field="company.partner_id.country_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.vat"/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+                <div class="page">
+                    <div class="oe_structure"/>
+                      
+                    <center>
+                        <b>
+                            <h3>  أوامر الاستلام </h3>
+                        </b>
+                    </center>
+                    <center>
+                        <b> من
+                            <span t-esc="start_date"/>
+                            إلى 
+                            <span t-esc="end_date"/>
+                        </b>
+                    </center>
+                    <br/>
+                    
+                    
+                      
+                    <t t-foreach="data.keys()" t-as="vendor">
+                        <br/>
+                        <center>
+                            <b class="salesperson">
+                                <span>   المورد : </span>
+                                <span t-esc="vendor"/>
+
+                            </b>
+                            
+                            
+                        </center>
+                        
+                        
+                        <br/>
+                        <t t-set="balance" t-value=""/>
+
+                        <t t-set="total_sum" t-value="0"/>
+                        <t t-set="total_tax" t-value="0"/>
+                        <t t-set="total_untax" t-value="0"/>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                   <th>الإجمالي</th>
+                                   <th>الإجمالي بدون ضرائب</th>
+                                   <th>الضرائب</th>
+                                   <th>الحالة</th>
+                                    <th>التاريخ</th>
+                                     <th>رقم الأمر</th>
+                                   
+                                   
+                                </tr>
+                                <tr t-foreach="data[vendor]" t-as="order">
+                  
+                                    <td>
+                                        <span t-esc="order[4]"/>
+                                        <t t-set="total_sum" t-value="total_sum + order[4]"/>
+                                        <t t-set="balance" t-value="order[2]"/>
+                                        
+                                    </td>
+                                    <td>
+                                        <span t-esc="order[7]"/>
+                                        <t t-set="total_untax" t-value="total_untax + order[7]"/>
+
+                                    </td>
+                                    <td>
+                                        <span t-esc="order[6]"/>
+                                        <t t-set="total_tax" t-value="total_tax + order[6]"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="order[3]"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="order[1]" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="order[0]"/>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                  <td>
+                                        <span t-esc="total_sum"/>
+                                  </td>
+                                  <td>
+                                        <span t-esc="total_untax"/>
+                                  </td>
+                                  <td>
+                                        <span t-esc="total_tax"/>
+                                  </td>
+                                    
+                                    <td colspan="1">
+                                    </td>
+                                    <td>
+                                        <b>إجمالي </b>
+                                    </td>
+                                </tr>
+                                
+
+                                <tr>
+                                  <td colspan="5">
+                                        <span t-esc="balance"/>
+                                    </td>
+                                    
+                                    <td>
+                                        <b>رصيد المورد </b>
+                                    </td>
+                                </tr>
+                               
+                            </thead>
+                        </table>
+                        </t>
+                      
+                </div>
+            </t>
+
+    </template>
+</odoo>
