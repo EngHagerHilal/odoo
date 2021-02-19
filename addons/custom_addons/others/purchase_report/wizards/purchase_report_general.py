@@ -11,7 +11,7 @@ class PurchaseReportVendor(models.TransientModel):
     car_num = fields.Text(string='Car Number')
     
 
-    def print_vendor_wise_purchase_report(self):
+    def print_purchase_report(self):
         purchase_order = self.env['purchase.order'].search([])
         filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
 
