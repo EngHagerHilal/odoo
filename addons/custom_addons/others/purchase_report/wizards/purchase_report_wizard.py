@@ -28,4 +28,4 @@ class PurchaseReportVendor(models.TransientModel):
         }
 
         print('datas:', datas)
-        return self.env.ref('vendor_wise_purchase_report.report_purchase_vendor').report_action([], data=datas)
+        return self.env.ref('purchase_report.report_general_purchase').report_action([], data=datas)

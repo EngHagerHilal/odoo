@@ -1,7 +1,7 @@
 from odoo import fields, models, api
 
 class PurchaseReportVendor(models.AbstractModel):
-    _name = 'report.vendor_wise_purchase_report.purchase_report_vendor'
+    _name = 'report.purchase_report.purchase_report_general'
 
     @api.model
     def _get_report_values(self, docids, data=None):

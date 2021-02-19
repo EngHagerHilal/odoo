@@ -1,6 +1,6 @@
 
 {
-    'name': 'Purchase Report ',
+    'name': 'purchase_report',
     'version': '12.0.0.0.1',
     'summary': 'Generate purchase general report',
     "description": """
