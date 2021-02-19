@@ -14,7 +14,7 @@ class PurchaseReportVendor(models.TransientModel):
     def print_purchase_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         purchase_order = self.env['purchase.order'].search([])
-        filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
+        filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver.name == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
 
         orders = [] 
         for order in purchase_order :
@@ -35,6 +35,9 @@ class PurchaseReportVendor(models.TransientModel):
                 line_details.append(line.product_id.name)
                 line_details.append(line.product_qty)
                 line_details.append(line.qty_received)
+                line_details.append(line.price_subtotal)
+                line_details.append(line.price_tax)
+                line_details.append(line.price_total)
                 lines.append(line_details)
             temp_data.append(lines)
             orders.append(temp_data)
