@@ -23,7 +23,6 @@ class PurchaseReportVendor(models.TransientModel):
             'end_date': self.end_date ,
             'driver' : self.driver ,
             'car_number' : self.car_num ,
-            'vendor' : self.vendor
         }
 
         print('datas:', datas)

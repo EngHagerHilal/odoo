@@ -60,11 +60,7 @@
                             <h3>  تقارير مشتريات  </h3>
                         </b>
                     </center>
-                    <center>
-                        <b>
-                           <span t-esc="vendor"/>
-                        </b>
-                    </center>
+                    
                     <center>
                         <b> من
                             <span t-esc="start_date"/>
