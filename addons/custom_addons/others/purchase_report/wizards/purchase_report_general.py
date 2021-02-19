@@ -17,7 +17,7 @@ class PurchaseReportVendor(models.TransientModel):
         filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver.name == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
 
         orders = [] 
-        for order in purchase_order :
+        for order in filtered_purchase_order :
             temp_data = []
             temp_data.append(order.name)
             temp_data.append(order.date_order)
