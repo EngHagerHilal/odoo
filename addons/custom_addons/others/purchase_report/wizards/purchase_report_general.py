@@ -23,16 +23,16 @@ class PurchaseReportVendor(models.TransientModel):
             temp_data.append(order.date_order)
             temp_data.append(order.x_balance)
             temp_data.append(order.amount_total)
-            temp_data.append(order.partner_id)
+            temp_data.append(order.partner_id.name)
             temp_data.append(order.amount_tax)
             temp_data.append(order.amount_untaxed)
-            temp_data.append(order.x_driver)
+            temp_data.append(order.x_driver.name)
             temp_data.append(order.x_car_number)
             temp_data.append(order.x_paid_driver)
             lines = []
             for line in order.order_line :
                 line_details = []
-                line_details.append(line.product_id)
+                line_details.append(line.product_id.name)
                 line_details.append(line.product_qty)
                 line_details.append(line.qty_received)
                 lines.append(line_details)
