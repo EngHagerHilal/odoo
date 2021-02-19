@@ -13,5 +13,4 @@ class PurchaseReportVendor(models.AbstractModel):
             'end_date': data['end_date'],
             'driver' : data['driver'] ,
             'car_number' : data['car_number'] ,
-            'vendor' : data['vendor'],
         }
