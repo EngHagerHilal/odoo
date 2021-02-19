@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="purchase_general_report" model="ir.ui.view">
+        <field name="name">Purchase Report</field>
+        <field name="model">purchase.report.general</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="driver"/>
+                    </group>
+                    <group>
+                        <field name="car_num"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="vendor" />
+                    </group>
+                    
+                </group>
+                <footer>
+                    <button name="print_general_purchase_report" string="Print" type="object" class="oe_highlight"/>
+                    OR
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_general_report" model="ir.actions.act_window">
+        <field name="name">Purchase General Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.report.general</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="purchase_general_report"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_purchase_general_report"
+              id="menu_purchase_report_wizard"
+              parent="purchase.purchase_report"/>
+
+</odoo>
