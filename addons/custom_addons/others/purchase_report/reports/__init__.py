@@ -1,1 +1,1 @@
-from . import purchase_report_vendor
+from . import purchase_report_general

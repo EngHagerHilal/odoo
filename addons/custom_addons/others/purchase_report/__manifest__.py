@@ -14,8 +14,8 @@
     'license': 'LGPL-3',
     'category': 'Purchase',
     'data':[
-        'wizards/purchase_report_wizard.xml',
-        'reports/purchase_report_vendor.xml',
+        'wizards/purchase_report_general.xml',
+        'reports/purchase_report_general.xml',
         'reports/purchase_reports.xml',
        ],
     'images': ['static/description/banner.png'],
