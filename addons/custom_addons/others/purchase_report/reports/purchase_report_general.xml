@@ -103,9 +103,8 @@
                     <th>
                     الإجمالي
                     </th>
-                    <th>
-                    </th>
-           </head>
+                    
+           </thead>
            
            <tbody>
            <t t-foreach="data" t-as="order" >
