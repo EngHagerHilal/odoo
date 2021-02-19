@@ -8,7 +8,8 @@ class PurchaseReportVendor(models.AbstractModel):
         return {
             'doc_ids': data.get('ids'),
             'doc_model': data.get('model'),
-            'data': data['form'],
+            'dat': data['form'],
+            'data': data['out'],
             'start_date': data['start_date'],
             'end_date': data['end_date'],
             'driver' : data['driver'] ,
