@@ -10,7 +10,7 @@ class PurchaseReportVendor(models.TransientModel):
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
     
-    vendor = fields.One2many('res.partner', string='Vendors', required=True)
+    vendor = fields.Many2one('res.partner', string='Vendors', required=True)
 
     def print_vendor_wise_purchase_report(self):
         purchase_order = self.env['purchase.order'].search([])
