@@ -75,29 +75,29 @@
                     <t t-foreach="data" t-as="order">
                     <t t-foreach="order[10]" t-as="line">
                     <div>
-                    <span t-esc="order[0]" >
+                    <span t-esc="order[0]" />
                     <br/>
-                    <span t-esc="order[1]" >
+                    <span t-esc="order[1]" />
                     <br/>
-                    <span t-esc="order[4]" >
+                    <span t-esc="order[4]" />
                     <br/>
-                    <span t-esc="line[0]" >
+                    <span t-esc="line[0]" />
                     <br/>
-                    <span t-esc="line[1]" >
+                    <span t-esc="line[1]" />
                     <br/>
-                    <span t-esc="line[2]" >
+                    <span t-esc="line[2]" />
                     <br/>
-                    <span t-esc="order[2]" >
+                    <span t-esc="order[2]" />
                     <br/>
-                    <span t-esc="order[3]" >
+                    <span t-esc="order[3]" />
                     <br/>
-                    <span t-esc="order[6]" >
+                    <span t-esc="order[6]" />
                     <br/>
-                    <span t-esc="order[7]" >
+                    <span t-esc="order[7]" />
                     <br/>
-                    <span t-esc="order[8]" >
+                    <span t-esc="order[8]" />
                     <br/>
-                    <span t-esc="order[9]" >
+                    <span t-esc="order[9]" />
                     <br/>
                     </div>
                       <div> Lineee Endddddddddddddddddd</div>  
