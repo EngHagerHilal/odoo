@@ -12,13 +12,19 @@ class PurchaseReportVendor(models.TransientModel):
     
 
     def print_purchase_report(self):
-        purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)]).browse()
+        purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)]).id
+        orders = [] 
+        for order in purchase_order :
+            new = self.env['purchase.order'].browse(order)
+            order.append(order)
+
+        
         filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
 
         datas = {
             'ids': self,
             'model': 'purchase.report.general',
-            'out' : purchase_order ,
+            'out' : orders ,
             'form': filtered_purchase_order,
             'start_date': self.start_date,
             'end_date': self.end_date ,
