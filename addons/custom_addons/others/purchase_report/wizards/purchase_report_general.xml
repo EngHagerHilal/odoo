@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="purchase_general_report" model="ir.ui.view">
-        <field name="name">Purchase Report</field>
+        <field name="name">Purchase General Report</field>
         <field name="model">purchase.report.general</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Purchase Report">
+            <form string="Purchase General Report">
                 <group>
                     <group>
                         <field name="start_date"/>
@@ -23,14 +22,8 @@
                         <field name="car_num"/>
                     </group>
                 </group>
-                <group>
-                    <group>
-                        <field name="vendor" />
-                    </group>
-                    
-                </group>
                 <footer>
-                    <button name="print_general_purchase_report" string="Print" type="object" class="oe_highlight"/>
+                    <button name="print_purchase_report" string="Print" type="object" class="oe_highlight"/>
                     OR
                     <button string="Cancel" special="cancel"/>
                 </footer>

@@ -10,11 +10,10 @@ class PurchaseReportVendor(models.TransientModel):
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
     
-    vendor = fields.Many2one('res.partner', string='Vendors', required=True)
 
     def print_vendor_wise_purchase_report(self):
         purchase_order = self.env['purchase.order'].search([])
-        filtered_purchase_order = list(filter(lambda x: (x.partner_id ==self.vendor and x.x_car_number == self.car_num and (x.x_driver == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
+        filtered_purchase_order = list(filter(lambda x: ( x.x_car_number == self.car_num and (x.x_driver == self.driver or x.x_paid_driver == self.driver) and x.date_order >= self.start_date and x.date_order <= self.end_date)  , purchase_order))
 
         datas = {
             'ids': self,
