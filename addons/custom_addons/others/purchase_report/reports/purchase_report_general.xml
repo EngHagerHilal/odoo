@@ -13,6 +13,7 @@
                     .table {
                       border-collapse: collapse;
                       width: 100%;
+                      direction: rtl ;
                     }
 
                     .table th, .table td {
@@ -69,7 +70,7 @@
                         </b>
                     </center>
                     <br/>
-                    <table class="table table-condensed" style="direction:rlt;">
+                    <table class="table table-condensed" style="direction:rtl;">
                     <thead>
                     <th> رقم الأمر
                     </th>
@@ -108,7 +109,7 @@
            
            <tbody>
            <t t-foreach="data" t-as="order" >
-           <tr t-foreach="order[10]" t-as="line" >
+           <tr t-foreach="order[10]" t-as="orderline" >
            <td> 
            <span t-esc="order[0]" />
            </td>
