@@ -7,7 +7,7 @@
 from odoo import api, models, fields
 
 class PurchaseOrder(models.Model):
-    _inherit = 'purchase.order'
+    _inherit = 'sale.order'
 
     def create_invoice(self):
         bill = self.env['account.invoice']
