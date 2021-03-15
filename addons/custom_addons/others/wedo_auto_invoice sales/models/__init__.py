@@ -4,7 +4,7 @@
 # Email: apps@wedotech-s.com
 # Phone:00249900034328 - 00249122005009
 
-from . import res_config_settings
+#from . import res_config_settings
 from . import sale
 
 

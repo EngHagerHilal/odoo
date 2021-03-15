@@ -31,7 +31,7 @@ class PurchaseOrder(models.Model):
 
     def _get_invoiced(self):
         super(SaleOrder, self)._get_invoiced()
-        if self.invoice_status == 'to invoice' and self.company_id.auto_invoice:
+        if self.invoice_status == 'to invoice':
             self.create_invoice()
             super(SaleOrder, self)._get_invoiced()
 

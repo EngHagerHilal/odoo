@@ -23,7 +23,7 @@
 	'images': ['images/main_screenshot.png'], 
     'depends': ['sale'],
     'data': [
-        'views/res_config_settings_views.xml',
+        
     ],
 
 }
