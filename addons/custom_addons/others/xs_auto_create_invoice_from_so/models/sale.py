@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()
+        res = super(SaleOrder, self).action_confirm()        
         if res:
             self.action_invoice_create()
             for invoice in self.invoice_ids:
