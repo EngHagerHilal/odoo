@@ -11,10 +11,10 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()        
-        if res:
+       # res = super(SaleOrder, self).action_confirm()        
+        if self.staus == 'sale':
             self.action_invoice_create()
-            for invoice in self.invoice_ids:
-                invoice.action_invoice_open()
-        return res
+            #for invoice in self.invoice_ids:
+                #invoice.action_invoice_open()
+        
 
