@@ -23,6 +23,7 @@ class SaleOrder(models.Model):
             'sale_id': self.id,
             'origin': self.name,
         })
+        
         bill.action_invoice_create()
         invoice_vals = bill._convert_to_write(bill._cache)
         #self.invoice_ids += bill
@@ -30,7 +31,7 @@ class SaleOrder(models.Model):
 
     def _get_invoiced(self):
         super(SaleOrder, self)._get_invoiced()
-        if self.invoice_status == 'to invoice':
-            self.create_invoice()
+        if self.invoice_status == 'to invoice' :
+            self.action_invoice_create()
             super(SaleOrder, self)._get_invoiced()
 
