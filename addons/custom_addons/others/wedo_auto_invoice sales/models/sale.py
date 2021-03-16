@@ -23,7 +23,7 @@ class SaleOrder(models.Model):
             'sale_id': self.id,
             'origin': self.name,
         })
-        bill.sale_order_change()
+        bill.action_invoice_open()
         invoice_vals = bill._convert_to_write(bill._cache)
         #self.invoice_ids += bill
         self.env['account.invoice'].create(invoice_vals)
