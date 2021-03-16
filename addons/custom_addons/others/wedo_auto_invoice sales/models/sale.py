@@ -15,7 +15,6 @@ class SaleOrder(models.Model):
         bill = bill.new({
             'date': fields.date.today(),
             'partner_id': self.partner_id.id,
-            'ref': self.partner_ref,
             'company_id': self.company_id.id,
             'invoice_payment_term_id': self.payment_term_id.id,
             'currency_id': self.currency_id.id,
