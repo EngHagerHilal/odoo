@@ -33,14 +33,14 @@ class InventoryReportVendor(models.TransientModel):
             for move in order.move_lines :
                 if ( move.product_id == self.product) :
                     moves.append ({
-                        date : order.date_done
-                        product : move.product_id.name
-                        quantity : move.product_qty	
-                        driver : order.x_driver.name
-                        car : order.x_car_number
-                        picking : order.name
-                        source : order.location_id.name
-                        dest : order.location_dest_id.name
+                        date : order.date_done,
+                        product : move.product_id.name,
+                        quantity : move.product_qty	,
+                        driver : order.x_driver.name,
+                        car : order.x_car_number,
+                        picking : order.name ,
+                        source : order.location_id.name,
+                        dest : order.location_dest_id.name ,
                     })
         
 
