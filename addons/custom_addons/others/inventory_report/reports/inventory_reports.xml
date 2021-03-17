@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_general_inventory"
+                string="General Inventory Report"
+                model="inventory.report.general"
+                report_type="qweb-pdf"
+                file="inventory_report.inventory_report_general"
+                name="inventory_report.inventory_report_general"
+        />
+    </data>
+</odoo>
