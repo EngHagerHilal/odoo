@@ -5,9 +5,7 @@ class PurchaseReportVendor(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        return {
-            'doc_ids': data.get('doc_ids'),
-            'doc_model': data.get('model'),
+        return { 
             'data': data['form'],
             'start_date': data['start_date'],
             'end_date': data['end_date'],
@@ -17,3 +15,4 @@ class PurchaseReportVendor(models.AbstractModel):
             'dest' : date['dest_location'] ,
             'product' : date['product'] 
         }
+        

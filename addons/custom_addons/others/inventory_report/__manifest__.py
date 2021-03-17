@@ -10,7 +10,7 @@
     'maintainer': 'Leen',
     'Company': 'Leen',
     'website': 'http://leen-eg.com',
-    'depends': ['base','contacts','stock'],
+    'depends': ['base','stock'],
     'license': 'LGPL-3',
     'category': 'Inventory',
     'data':[
