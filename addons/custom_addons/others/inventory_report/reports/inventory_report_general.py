@@ -14,6 +14,6 @@ class PurchaseReportVendor(models.AbstractModel):
             'driver' : data['driver'] ,
             'car_number' : data['car_number'] ,
             'source' : data['source_location'] ,
-            'dest' : date['dest_location'] ,
-            'product' : date['product'] ,
+            'dest' : data['dest_location'] ,
+            'product' : data['product'] ,
         }
