@@ -22,9 +22,9 @@ class InventoryReportVendor(models.TransientModel):
                 ('date_done', '>=', self.start_date),
                 ('date_done', '<', self.end_date),
                 ('x_driver.name', 'in', self.driver) ,
-                ('x_car_number' , '==' , self.car_num) ,
-                ('location_id' , '==' , self.source ),
-                ('location_dest_id' , '==' , self.dest) ,
+                ('x_car_number' , '=' , self.car_num) ,
+                ('location_id' , '=' , self.source ),
+                ('location_dest_id' , '=' , self.dest) ,
         ])
 
         #filtered_moves = list(filter(lambda x: x.date_order >= self.start_date and x.date_order <= self.end_date,  purchase_order))
