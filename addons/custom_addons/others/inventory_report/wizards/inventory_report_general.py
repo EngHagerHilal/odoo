@@ -18,10 +18,10 @@ class InventoryReportVendor(models.TransientModel):
 
     def print_inventory_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
-        moves = self.env['stock.picking'].search([
+        orders = self.env['stock.picking'].search([
                 ('date_done', '>=', self.start_date),
                 ('date_done', '<', self.end_date),
-                ('x_driver.name', 'in', self.driver) ,
+                ('x_driver.name', '=', self.driver) ,
                 ('x_car_number' , '=' , self.car_num) ,
                 ('location_id' , '=' , self.source ),
                 ('location_dest_id' , '=' , self.dest) ,
@@ -29,7 +29,7 @@ class InventoryReportVendor(models.TransientModel):
 
         #filtered_moves = list(filter(lambda x: x.date_order >= self.start_date and x.date_order <= self.end_date,  purchase_order))
         moves = []
-        for order in moves :
+        for order in orders :
             for move in order.move_lines :
                 if ( move.product_id == self.product) :
                     moves.append ({
