@@ -45,7 +45,7 @@ class InventoryReportVendor(models.TransientModel):
         
 
         datas = {
-            'doc_ids': self,
+            'ids': self,
             'model': 'inventory.report.general',
             'form': moves,
             'start_date': self.start_date,
@@ -54,7 +54,7 @@ class InventoryReportVendor(models.TransientModel):
             'car_number' : self.car_num ,
             'source_location' : self.source ,
             'dest_location' : self.dest ,
-            'product' : self.product
+            'product' : self.product ,
         }
 
         print('datas:', datas)
