@@ -10,10 +10,10 @@ class InventoryReportVendor(models.TransientModel):
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
     
-    source = fields.Many2One( 'stock.location',string="Source Location")
-    dest = fields.Many2One( 'stock.location	', string="Destination Location")
+    source = fields.Many2one( 'stock.location',string="Source Location")
+    dest = fields.Many2one( 'stock.location	', string="Destination Location")
     
-    product = fields.Many2One(string="Product")
+    product = fields.Many2one(string="Product")
     
 
     def print_inventory_report(self):
