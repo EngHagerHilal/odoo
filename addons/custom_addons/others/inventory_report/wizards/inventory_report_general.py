@@ -8,8 +8,8 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
 class InventoryReportVendor(models.TransientModel):
     _name = 'inventory.report.general'
 
-    start_date = fields.Datetime(string="Start Date", required=True)
-    end_date = fields.Datetime(string="End Date", required=True)
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
 
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
@@ -22,10 +22,22 @@ class InventoryReportVendor(models.TransientModel):
 
     def print_inventory_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
-        orders = self.env['stock.picking'].search([])
-
+        orders = self.env['stock.picking']
+        start_date = datetime.strptime(start_date, DATE_FORMAT)
+        end_date = datetime.strptime(end_date, DATE_FORMAT)
+        delta = timedelta(days=1)
+       
+        while start_date <= end_date:
+            date = start_date
+            start_date += delta
         
-        filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
+        orders = orders.search([
+                ('date_done', '>=', date.strftime(DATETIME_FORMAT)),
+                ('date_done', '<', start_date.strftime(DATETIME_FORMAT)),
+        ])
+
+        filtered_moves = orders 
+        #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
         if self.car_num : 
