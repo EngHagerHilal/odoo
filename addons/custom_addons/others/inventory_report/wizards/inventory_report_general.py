@@ -23,8 +23,8 @@ class InventoryReportVendor(models.TransientModel):
     def print_inventory_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         orders = self.env['stock.picking']
-        start_date = datetime.strptime(start_date, DATE_FORMAT)
-        end_date = datetime.strptime(end_date, DATE_FORMAT)
+        start_date = datetime.strptime(self.start_date, DATE_FORMAT)
+        end_date = datetime.strptime(self.end_date, DATE_FORMAT)
         delta = timedelta(days=1)
        
         while start_date <= end_date:
