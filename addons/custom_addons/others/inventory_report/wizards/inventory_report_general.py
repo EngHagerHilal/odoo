@@ -21,13 +21,13 @@ class InventoryReportVendor(models.TransientModel):
         orders = self.env['stock.picking'].search([
                 ('date_done', '>=', self.start_date),
                 ('date_done', '<', self.end_date),
-                ('x_driver.name', '=', self.driver) ,
-                ('x_car_number' , '=' , self.car_num) ,
-                ('location_id' , '=' , self.source ),
-                ('location_dest_id' , '=' , self.dest) ,
         ])
 
         #filtered_moves = list(filter(lambda x: x.date_order >= self.start_date and x.date_order <= self.end_date,  purchase_order))
+        #('x_driver.name', '=', self.driver) ,
+         #       ('x_car_number' , '=' , self.car_num) ,
+          #      ('location_id' , '=' , self.source ),
+           #     ('location_dest_id' , '=' , self.dest) 
         moves = []
         for order in orders :
             for move in order.move_lines :
