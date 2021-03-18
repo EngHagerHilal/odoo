@@ -42,7 +42,7 @@ class InventoryReportVendor(models.TransientModel):
 
 
         moves = []
-        for order in orders :
+        for order in filtered_moves :
             for move in order.move_lines :
                 if ( move.product_id == self.product or not self.product) :
                     moves.append ({
@@ -52,8 +52,8 @@ class InventoryReportVendor(models.TransientModel):
                         'driver' : order.x_driver.name,
                         'car' : order.x_car_number,
                         'picking' : order.name ,
-                        'source' : order.location_id.name,
-                        'dest' : order.location_dest_id.name ,
+                        'source' : order.location_id.complete_name,
+                        'dest' : order.location_dest_id.complete_name ,
                     })
         datas = {
             'ids': self,
