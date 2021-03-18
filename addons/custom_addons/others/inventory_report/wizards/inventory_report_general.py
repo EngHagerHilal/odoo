@@ -25,7 +25,7 @@ class InventoryReportVendor(models.TransientModel):
         orders = self.env['stock.picking'].search([])
 
         
-        filtered_moves = list(filter(lambda x: x.date_done.strftime(DATETIME_FORMAT) >= self.start_date.strftime(DATETIME_FORMAT) and x.date_done.strftime(DATETIME_FORMAT) <= self.end_date.strftime(DATETIME_FORMAT),  orders))
+        filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
         if self.car_num : 
