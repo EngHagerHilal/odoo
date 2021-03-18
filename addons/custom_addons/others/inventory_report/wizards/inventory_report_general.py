@@ -8,8 +8,8 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
 class InventoryReportVendor(models.TransientModel):
     _name = 'inventory.report.general'
 
-    start_date = fields.Date(string="Start Date", required=True)
-    end_date = fields.Date(string="End Date", required=True)
+    start_date = fields.Datetime(string="Start Date", required=True)
+    end_date = fields.Datetime(string="End Date", required=True)
 
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
