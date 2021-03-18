@@ -18,29 +18,33 @@ class InventoryReportVendor(models.TransientModel):
 
     def print_inventory_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
-        orders = self.env['stock.picking'].search([
-                ('date_done', '>=', self.start_date),
-                ('date_done', '<', self.end_date),
-        ])
+        orders = self.env['stock.picking'].search([])
 
-        #filtered_moves = list(filter(lambda x: x.date_order >= self.start_date and x.date_order <= self.end_date,  purchase_order))
-        #('x_driver.name', '=', self.driver) ,
-         #       ('x_car_number' , '=' , self.car_num) ,
-          #      ('location_id' , '=' , self.source ),
-           #     ('location_dest_id' , '=' , self.dest) 
+        
+        filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_order <= self.end_date,  orders))
+        if self.driver :
+            filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
+        if self.car_num : 
+            filtered_moves = list(filter(lambda x: x.x_car_number == self.car_num , filtered_moves))
+        if self.source : 
+            filtered_moves = list(filter(lambda x: x.location_id == self.source , filtered_moves))
+        if self.dest : 
+            filtered_moves = list(filter(lambda x: x.location_dest_id == self.dest , filtered_moves))
+
+
         moves = []
         for order in orders :
             for move in order.move_lines :
-                if ( move.product_id == self.product) :
+                if ( move.product_id == self.product or not self.product) :
                     moves.append ({
-                        date : order.date_done,
-                        product : move.product_id.name,
-                        quantity : move.product_qty	,
-                        driver : order.x_driver.name,
-                        car : order.x_car_number,
-                        picking : order.name ,
-                        source : order.location_id.name,
-                        dest : order.location_dest_id.name ,
+                        'date' : order.date_done,
+                        'product' : move.product_id.name,
+                        'quantity' : move.product_qty	,
+                        'driver' : order.x_driver.name,
+                        'car' : order.x_car_number,
+                        'picking' : order.name ,
+                        'source' : order.location_id.name,
+                        'dest' : order.location_dest_id.name ,
                     })
         
 
