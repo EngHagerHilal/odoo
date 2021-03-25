@@ -198,7 +198,7 @@ exports.PosModel = Backbone.Model.extend({
     },{
         model:  'res.partner',
         fields: ['name','street','city','state_id','country_id','vat',
-                 'phone','zip','mobile','email','barcode','write_date',
+                 'phone','zip','mobile','email','barcode','write_date' , 'civil_id',
                  'property_account_position_id','property_product_pricelist'],
         domain: [['customer','=',true]],
         loaded: function(self,partners){

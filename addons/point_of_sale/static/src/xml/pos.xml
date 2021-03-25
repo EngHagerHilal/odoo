@@ -468,7 +468,7 @@
                         <t t-if='partner.civil_id'>
                             <span class='detail vat'><t t-esc='partner.civil_id'/></span>
                         </t>
-                        <t t-if='!partner.civil'>
+                        <t t-if='!partner.civil_id'>
                             <span class='detail vat empty'>N/A</span>
                         </t>
                         
