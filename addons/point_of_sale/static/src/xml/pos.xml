@@ -464,9 +464,12 @@
                         </t>
                     </div>
                      <div class='client-detail'>
-                        <span class='label'>Tax ID</span>
+                        <span class='label'>Civil ID</span>
                         <t t-if='partner.civil_id'>
                             <span class='detail vat'><t t-esc='partner.civil_id'/></span>
+                        </t>
+                        <t t-if='!partner.civil'>
+                            <span class='detail vat empty'>N/A</span>
                         </t>
                         
                     </div>
@@ -523,6 +526,7 @@
                                                 <th>Name</th>
                                                 <th>Address</th>
                                                 <th>Phone</th>
+                                                <th>Civil ID</th>
                                             </tr>
                                         </thead>
                                         <tbody class='client-list-contents'>
