@@ -322,7 +322,7 @@
             <td><t t-esc='partner.name' /></td>
             <td><t t-esc='partner.address' /></td>
             <td><t t-esc='partner.phone or partner.mobile or ""' /></td>
-            <td><t t-esc='civil_id' /></td>
+            <td><t t-esc='partner.civil_id' /></td>
         </tr>
     </t>
 
