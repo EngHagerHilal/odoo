@@ -11,6 +11,7 @@ class ResPartner(models.Model):
         help="The number of point of sales orders related to this customer",
         groups="point_of_sale.group_pos_user",
     )
+    
 
     def _compute_pos_order(self):
         partners_data = self.env['pos.order'].read_group([('partner_id', 'in', self.ids)], ['partner_id'], ['partner_id'])

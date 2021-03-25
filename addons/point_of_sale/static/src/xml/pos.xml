@@ -322,6 +322,7 @@
             <td><t t-esc='partner.name' /></td>
             <td><t t-esc='partner.address' /></td>
             <td><t t-esc='partner.phone or partner.mobile or ""' /></td>
+            <td><t t-esc='civil_id' /></td>
         </tr>
     </t>
 
@@ -381,6 +382,10 @@
                         <input class='detail barcode'       name='barcode'    t-att-value='partner.barcode || ""'></input>
                     </div>
                     <div class='client-detail'>
+                        <span class='label'>Civil ID</span>
+                        <input class='detail barcode'       name='civil_id'    t-att-value='partner.barcode || ""'></input>
+                    </div>
+                    <div class='client-detail'>
                         <span class='label'>Tax ID</span>
                         <input class='detail vat'           name='vat'     t-att-value='partner.vat || ""'></input>
                     </div>
@@ -437,6 +442,7 @@
                             <span class='detail client-phone empty'>N/A</span>
                         </t>
                     </div>
+                    
                 </div>
                 <div class='client-details-right'>
                     <div class='client-detail'>
@@ -456,6 +462,13 @@
                         <t t-if='!partner.vat'>
                             <span class='detail vat empty'>N/A</span>
                         </t>
+                    </div>
+                     <div class='client-detail'>
+                        <span class='label'>Tax ID</span>
+                        <t t-if='partner.civil_id'>
+                            <span class='detail vat'><t t-esc='partner.civil_id'/></span>
+                        </t>
+                        
                     </div>
                     <div t-attf-class='client-detail #{widget.pos.pricelists.length &lt;= 1 ? "oe_hidden" : ""}'>
                         <span class='label'>Pricelist</span>
