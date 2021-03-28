@@ -10,8 +10,6 @@ class SaleAgent(models.Model):
 
     commisions = fields.Float(string="Commision" , readOnly = True, compute='compute_commision')
     last_reset = fields.DateTime(string="Last Date" , readOnly = True , required = True , default=now())
-
-
     def compute_commision(self):
         invoices = self.env['account.invoice']
         comm = 0 
@@ -27,16 +25,15 @@ class SaleAgent(models.Model):
                                         if "بل" in line.product_id.name :
                                             count = count + line.quantity 
                                 comm = comm + ( count // 1000 ) * 12
-                                             
                             else :
                                 if (invoice.__last_update - invoice.create_date).days <= 30 :
                                     if invoice.invoice_line_ids :
-                                    count = 0 
-                                    for line in invoice.invoice_line_ids :
-                                        if "بل" in line.product_id.name :
-                                            count = count + line.quantity 
-                                comm = comm + ( count // 1000 ) * 10
-        self.commisions = comm 
+                                        count = 0 
+                                        for line in invoice.invoice_line_ids :
+                                            if "بل" in line.product_id.name :
+                                                count = count + line.quantity 
+                                    comm = comm + ( count // 1000 ) * 10
+        self.commisions = comm
     
                                 
                             
