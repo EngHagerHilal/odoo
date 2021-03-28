@@ -9,7 +9,7 @@ class SaleAgent(models.Model):
     _inherit = 'hr.employee'
 
     commisions = fields.Float(string="Commision" , readOnly = True, compute='compute_commision')
-    last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=now())
+    last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
     def compute_commision(self):
         invoices = self.env['account.invoice']
         comm = 0 
