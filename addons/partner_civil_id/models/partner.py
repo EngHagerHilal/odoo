@@ -6,7 +6,6 @@ from openerp.exceptions import ValidationError
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
-
     civil_id = fields.Char(string="Civil ID" , size=12, required=True)
 
 

@@ -4,7 +4,7 @@ from odoo import api ,fields, models
 from openerp.exceptions import ValidationError
 
 
-class ResPartner(models.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     civil_id = fields.Char(string="Civil ID" , size=12, related='purchase_id.civil_id')

@@ -4,7 +4,7 @@ from odoo import api ,fields, models
 from openerp.exceptions import ValidationError
 
 
-class ResPartner(models.Model):
+class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
     civil_id = fields.Char(string="Civil ID" , size=12, required=True)
