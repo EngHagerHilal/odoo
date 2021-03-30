@@ -9,7 +9,7 @@ class AccountInvoice(models.Model):
 
     civil_id = fields.Char(string="Civil ID" , size=12, related='purchase_id.civil_id')
     name = fields.Text(string="Name" , related='purchase_id.name')
-    Phone = fields.Char(string="Phone Number" , size=12 , related='purchase_id.phone')
+    phone = fields.Char(string="Phone Number" , size=8 , related='purchase_id.phone')
 
     @api.constrains('civil_id')
     def _check_something(self):

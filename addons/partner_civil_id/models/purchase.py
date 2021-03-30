@@ -9,7 +9,7 @@ class PurchaseOrder(models.Model):
 
     civil_id = fields.Char(string="Civil ID" , size=12, required=True)
     name = fields.Text(string="Name")
-    Phone = fields.Char(string="Phone Number" , size=12 , required = True)
+    phone = fields.Char(string="Phone Number" , size=8 , required = True)
  
 
     @api.constrains('civil_id')
