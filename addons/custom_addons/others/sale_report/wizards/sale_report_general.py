@@ -40,6 +40,11 @@ class PurchaseReportVendor(models.TransientModel):
 
         orders = [] 
         for order in filtered_moves :
+            if order.x_driver : 
+                driver = order.x_driver.name
+            else:
+                if order.x_paid_driver : 
+                    driver = order.x_paid_driver
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
@@ -51,9 +56,9 @@ class PurchaseReportVendor(models.TransientModel):
                         'price_sub' : move.price_subtotal ,
                         'price_tax' : move.price_tax ,
                         'price_total' : move.price_total ,
-                        'driver' : order.x_driver.name or order.x_paid_driver,
+                        'driver' : driver,
                         'car' : order.x_car_number,
-                        'source' : order.warehouse_id.complete_name,
+                        'source' : order.warehouse_id.name,
                         'customer' : order.partner_id.name ,
                         'agent' : order.x_sale_agent.name ,
                         'balance' : order.x_balance ,

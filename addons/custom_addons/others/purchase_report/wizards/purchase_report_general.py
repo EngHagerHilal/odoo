@@ -7,7 +7,7 @@ class PurchaseReportVendor(models.TransientModel):
     start_date = fields.Datetime(string="Start Date", required=True)
     end_date = fields.Datetime(string="End Date", required=True)
 
-    driver = fields.Text(string='Driver')
+    driver = fields.Many2one('hr.employee' ,string='Driver' , domain=[('job_title', '=', 'سائق')] )
     car_num = fields.Text(string='Car Number')
     
     
@@ -58,7 +58,7 @@ class PurchaseReportVendor(models.TransientModel):
                         'driver' : driver,
                         'car' : order.x_car_number,
                         'source' : order.partner_id.name,
-                        'dest' : order.picking_type_id.complete_name ,
+                        'dest' : order.picking_type_id.warehouse_id.name ,
                         'balance' : order.x_balance ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
