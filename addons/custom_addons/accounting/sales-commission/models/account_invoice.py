@@ -24,15 +24,14 @@ class AccountInvoice(models.Model):
                         for line in self.invoice_line_ids :
                             if line.product_id.commission :
                                 count = count + line.quantity         
-                        comm = comm + ( count / 1000 ) * 12
+                        self.commission = (count/1000)*12
                     else :
                         if self.invoice_line_ids :
                              count = 0
                              for line in self.invoice_line_ids :
                                  if line.product_id.commission :
                                      count = count + line.quantity         
-                             comm = comm + ( count / 1000 ) * 10
-            self.commission = comm
+                            self.commission = (count/1000)*10
             self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
 
 
