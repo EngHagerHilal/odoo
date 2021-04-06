@@ -11,7 +11,7 @@ class AccountInvoice(models.Model):
     commission = fields.Float(
         string="Commissions",
         compute="compute_commission",
-        store=True,
+        default=0,
     )
     @api.onchange('state')
     def compute_commission(self) :
