@@ -16,7 +16,6 @@ class AccountInvoice(models.Model):
     @api.onchange('state')
     def compute_commission(self) :
         if (self.state == 'paid'):
-            comm = 0
             if self.write_date >= self.x_sale_agent.last_reset :
                 if (self.write_date.date() - self.date_invoice).days <= 1 :
                     if self.invoice_line_ids :
@@ -25,6 +24,8 @@ class AccountInvoice(models.Model):
                             if line.product_id.commission :
                                 count = count + line.quantity         
                         self.commission = (count/1000)*12
+                        self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
+
                     else :
                         if self.invoice_line_ids :
                              count = 0
@@ -32,7 +33,8 @@ class AccountInvoice(models.Model):
                                  if line.product_id.commission :
                                      count = count + line.quantity         
                              self.commission = (count/1000)* 10
-            self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
+                             self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
+
 
 
 
