@@ -10,7 +10,7 @@ class PurchaseReportVendor(models.TransientModel):
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
 
-    source = fields.Many2one( 'stock.location', string="Destination Location")
+    source = fields.Many2one( 'stock.warehouse', string="Source Location")
     
     product = fields.Many2one('product.product' , string="Product")
 

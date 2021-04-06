@@ -11,7 +11,7 @@ class PurchaseReportVendor(models.TransientModel):
     car_num = fields.Text(string='Car Number')
     
     
-    dest = fields.Many2one( 'stock.location', string="Destination Location")
+    dest = fields.Many2one( 'stock.picking.type', domain=[('code', '=', 'incoming')] ,  string="Destination Location")
     
     product = fields.Many2one('product.product' , string="Product")
 
@@ -28,7 +28,7 @@ class PurchaseReportVendor(models.TransientModel):
         filtered_moves = orders 
         #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
         if self.driver :
-            filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
+            filtered_moves = list(filter(lambda x: x.x_driver == self.driver , filtered_moves))
         if self.car_num : 
             filtered_moves = list(filter(lambda x: x.x_car_number == self.car_num , filtered_moves))
         if self.dest : 
