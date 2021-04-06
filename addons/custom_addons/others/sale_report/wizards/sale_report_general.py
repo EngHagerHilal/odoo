@@ -14,7 +14,7 @@ class SaleReportVendor(models.TransientModel):
     
     product = fields.Many2one('product.product' , string="Product")
 
-    customer = fields.Many2one('res.partner' ,domain=[('customer', '=', True)], string="Vendor")
+    customer = fields.Many2one('res.partner' ,domain=[('customer', '=', True)], string="Customer")
     agent = fields.Many2one('hr.employee' ,domain=[('job_title', '=', 'مندوب مبيعات')] ,string="Agent")
 
     def print_sale_report(self):
