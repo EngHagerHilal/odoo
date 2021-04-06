@@ -5,8 +5,8 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    commission_free = fields.Boolean(string="Free of commission",
+    commission = fields.Boolean(string="Free of commission",
                                      default=False)
     commission_type = fields.Selection(
         [('default', 'Default'),
-         ('extra', 'Extra')], string='Product Commission Status',
+         ('extra', 'Extra')], string='Product Commission Status')

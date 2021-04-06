@@ -10,47 +10,32 @@ class AccountInvoice(models.Model):
 
     commission = fields.Float(
         string="Commissions",
-        compute="_compute_commission_total",
+        compute="compute_commission",
         store=True,
     )
-
-    @api.depends('invoice_line_ids' , 'state' , 'write_date' , 'date_invoice')
+    @api.onchange('state')
     def compute_commission(self) :
-        for record in self :
-            record.commission = 0.0
-            if record.state == 'paid' :
-                
-            for line in record.invoice_line_ids:
-                record.commission_total += sum(x.amount for x in line.agents)
+        if (self.state == 'paid'):
+            comm = 0
+            if self.write_date >= self.x_sale_agent.last_reset :
+                if (self.write_date - self.date_invoice).days == 1 :
+                    if self.invoice_line_ids :
+                        count = 0
+                        for line in self.invoice_line_ids :
+                            if line.product_id.commission :
+                                count = count + line.quantity         
+                        comm = comm + ( count // 1000 ) * 12
+                    else :
+                        if self.invoice_line_ids :
+                             count = 0
+                             for line in self.invoice_line_ids :
+                                 if line.product_id.commission :
+                                     count = count + line.quantity         
+                             comm = comm + ( count // 1000 ) * 10
+            self.commission = comm
+            self.x_sale_agent.commisions = self.x_sale_agent.commisions + self.commission
 
 
-    #def compute_commision(self):
-    #    invoices = self.env['account.invoice']
-    #    comm = 0 
-    #    for record in self:
-    #        for invoice in invoices :
-    #            if invoice.sale_agent ==  record :
-    #                if invoice.state == 'Paid' :
-    #                    if invoice.__last_update >= self.last_reset :
-    #                        if (invoice.__last_update - invoice.create_date).days == 1 :
-    #                            if invoice.invoice_line_ids :
-    #                                count = 0 
-    #                                for line in invoice.invoice_line_ids :
-    #                                    if "بل" in line.product_id.name :
-    #                                        count = count + line.quantity 
-    #                            comm = comm + ( count // 1000 ) * 12
-    #                       else :
-    #                           if (invoice.__last_update - invoice.create_date).days <= 30 :
-    #                               if invoice.invoice_line_ids :
-    #                                   count = 0 
-    #                                   for line in invoice.invoice_line_ids :
-    #                                       if "بل" in line.product_id.name :
-    #                                           count = count + line.quantity 
-    #                               comm = comm + ( count // 1000 ) * 10
-    #   self.commisions = comm
-    
-                                
-                            
 
 
 
