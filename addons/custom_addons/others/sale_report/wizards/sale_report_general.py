@@ -1,8 +1,8 @@
 from odoo import models, fields, api, _
 
 
-class PurchaseReportVendor(models.TransientModel):
-    _name = 'purchase.report.general'
+class SaleReportVendor(models.TransientModel):
+    _name = 'sale.report.general'
 
     start_date = fields.Datetime(string="Start Date", required=True)
     end_date = fields.Datetime(string="End Date", required=True)
@@ -17,7 +17,7 @@ class PurchaseReportVendor(models.TransientModel):
     customer = fields.Many2one('res.partner' ,domain=[('customer', '=', True)], string="Vendor")
     agent = fields.Many2one('hr.employee' ,domain=[('job_title', '=', 'مندوب مبيعات')] ,string="Agent")
 
-    def print_purchase_report(self):
+    def print_sale_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         sale_order = self.env['sale.order']
         orders = sale_order.search([
