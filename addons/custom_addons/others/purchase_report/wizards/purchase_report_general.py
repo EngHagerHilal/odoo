@@ -10,48 +10,67 @@ class PurchaseReportVendor(models.TransientModel):
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
     
+    
+    dest = fields.Many2one( 'stock.location', string="Destination Location")
+    
+    product = fields.Many2one('product.product' , string="Product")
+
+    vendor = fields.Many2one('res.partner' , domain=[('supplier', '=', True)] , string="Vendor")
+
 
     def print_purchase_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
-        purchase_order = self.env['purchase.order'].search([])
-        filtered_purchase_order = list(filter(lambda x: x.date_order >= self.start_date and x.date_order <= self.end_date,  purchase_order))
+        purchase_order = self.env['purchase.order']
+        orders = purchase_order.search([
+                ('date_order', '>=', self.start_date),
+                ('date_order', '<=', self.end_date),
+        ])
+        filtered_moves = orders 
+        #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
+        if self.driver :
+            filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
+        if self.car_num : 
+            filtered_moves = list(filter(lambda x: x.x_car_number == self.car_num , filtered_moves))
+        if self.dest : 
+            filtered_moves = list(filter(lambda x: x.picking_type_id == self.dest , filtered_moves))
+        if self.vendor : 
+            filtered_moves = list(filter(lambda x: x.partner_id == self.vendor , filtered_moves))
+
 
         orders = [] 
-        for order in filtered_purchase_order :
-            temp_data = []
-            temp_data.append(order.name)
-            temp_data.append(order.date_order)
-            temp_data.append(order.x_balance)
-            temp_data.append(order.amount_total)
-            temp_data.append(order.partner_id.name)
-            temp_data.append(order.amount_tax)
-            temp_data.append(order.amount_untaxed)
-            temp_data.append(order.x_driver.name)
-            temp_data.append(order.x_car_number)
-            temp_data.append(order.x_paid_driver)
-            lines = []
-            for line in order.order_line :
-                line_details = []
-                line_details.append(line.product_id.name)
-                line_details.append(line.product_qty)
-                line_details.append(line.qty_received)
-                line_details.append(line.price_subtotal)
-                line_details.append(line.price_tax)
-                line_details.append(line.price_total)
-                lines.append(line_details)
-            temp_data.append(lines)
-            orders.append(temp_data)
+        for order in filtered_moves :
+            for move in order.order_line :
+                if ( move.product_id == self.product or not self.product) :
+                    orders.append ({
+                        'name' : order.name,
+                        'date' : order.date_order,
+                        'product' : move.product_id.name,
+                        'quantity' : move.product_qty	,
+                        'received' : move.qty_received ,
+                        'price_sub' : move.price_subtotal ,
+                        'price_tax' : move.price_tax ,
+                        'price_total' : move.price_total ,
+                        'driver' : order.x_driver.name or order.x_paid_driver,
+                        'car' : order.x_car_number,
+                        'source' : order.partner_id.name,
+                        'dest' : order.picking_type_id.complete_name ,
+                        'balance' : order.x_balance ,
+                        'total' : order.amount_total ,
+                        'untaxed' : order.amount_untaxed ,
+                        'taxed' : order.amount_tax
+                    })
         
-
         datas = {
             'ids': self,
-            'model': 'purchase.report.general',
-            'out' : orders ,
-            'form': filtered_purchase_order,
+            'model': 'inventory.report.general',
+            'form': orders,
             'start_date': self.start_date,
             'end_date': self.end_date ,
             'driver' : self.driver ,
             'car_number' : self.car_num ,
+            'dest_location' : self.dest ,
+            'product' : self.product ,
+            'vendor' : self.vendor ,
         }
 
         print('datas:', datas)

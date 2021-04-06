@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_general_sale"
+                string="General Sale Report"
+                model="sale.report.general"
+                report_type="qweb-pdf"
+                file="sale_report.sale_report_general"
+                name="sale_report.sale_report_general"
+        />
+    </data>
+</odoo>

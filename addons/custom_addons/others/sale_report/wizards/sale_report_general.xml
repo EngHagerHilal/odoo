@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_general_report" model="ir.ui.view">
+        <field name="name">Sale General Report</field>
+        <field name="model">sale.report.general</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Sale General Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                
+                    <group>
+                        <field name="driver"/>
+                        <field name="car_num"/>
+                    </group>
+
+                    <group>
+                        <field name="source"/>
+                        <field name="customer"/>
+                    </group>
+                    <group>
+                        <field name="agent"/>
+                        <field name="product"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_sale_report" string="Print" type="object" class="oe_highlight"/>
+                    OR
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_general_report" model="ir.actions.act_window">
+        <field name="name">Sale General Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.report.general</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sale_general_report"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_sale_general_report"
+              id="menu_sale_report_wizard"
+              parent="sale.menu_sale_report"/>
+
+</odoo>
