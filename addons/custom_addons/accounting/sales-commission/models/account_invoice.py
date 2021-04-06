@@ -18,7 +18,7 @@ class AccountInvoice(models.Model):
         if (self.state == 'paid'):
             comm = 0
             if self.write_date >= self.x_sale_agent.last_reset :
-                if (self.write_date - self.date_invoice).days == 1 :
+                if (self.write_date.date() - self.date_invoice).days <= 1 :
                     if self.invoice_line_ids :
                         count = 0
                         for line in self.invoice_line_ids :
