@@ -9,10 +9,10 @@
     "category": "Point Of Sale",
     # "live_test_url": "http://apps.it-projects.info/shop/product/DEMO-URL?version={ODOO_BRANCH}",
     "images": [],
-    "version": "12.0.1.1.1",
+    "version": "12.0.1.1.0",
     "application": False,
     "author": "IT-Projects LLC, Ivan Yelizariev",
-    "support": "apps@itpp.dev",
+    "support": "pos@it-projects.info",
     "website": "https://apps.odoo.com/apps/modules/12.0/pos_product_available/",
     "license": "Other OSI approved licence",  # MIT
     # "price": 9.00,

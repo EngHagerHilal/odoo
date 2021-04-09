@@ -13,6 +13,8 @@
     "support": "apps@itpp.dev",
     "website": "https://it-projects.info/team/KolushovAlexandr",
     "license": "Other OSI approved licence",  # MIT
+    "price": 90.00,
+    "currency": "EUR",
     "depends": ["point_of_sale"],
     "external_dependencies": {"python": [], "bin": []},
     "data": ["views/views.xml", "views/assets.xml"],
@@ -23,15 +25,15 @@
     "post_init_hook": None,
     "uninstall_hook": None,
     "auto_install": False,
-    "installable": True,
-     "demo_title": "Creation of Postponed invoices in POS",
-     "demo_addons": [
-     ],
-     "demo_addons_hidden": [
-     ],
-     "demo_url": "DEMO-URL",
-     "demo_summary": "This module allows the usage of a regular POS order payment process to create an invoice to be paid later",
-     "demo_images": [
-        "images/MAIN_IMAGE",
-     ]
+    "installable": False,
+    # "demo_title": "Creation of Postponed invoices in POS",
+    # "demo_addons": [
+    # ],
+    # "demo_addons_hidden": [
+    # ],
+    # "demo_url": "DEMO-URL",
+    # "demo_summary": "This module allows the usage of a regular POS order payment process to create an invoice to be paid later",
+    # "demo_images": [
+    #    "images/MAIN_IMAGE",
+    # ]
 }
