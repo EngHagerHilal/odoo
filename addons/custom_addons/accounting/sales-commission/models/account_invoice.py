@@ -18,7 +18,7 @@ class AccountInvoice(models.Model):
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
 
     
-    def deadline(self):
+    def compute_deadline(self):
         date = self.date_invoice
         x2 = self.date_invoice
         if date.day == 1 or date.day == 2 or date.day == 3 or date.day == 4 :
@@ -40,7 +40,7 @@ class AccountInvoice(models.Model):
    
     def compute_commission(self) :
         if (self.state == 'paid'):
-                if ( self.payment_date.getDate() < self.deadline):
+                if ( self.payment_date < self.deadline.date()):
                     if (self.payment_date - self.date_invoice).days <= 1 :
                         if self.invoice_line_ids :
                             count = 0
