@@ -1,12 +1,15 @@
-
 from odoo import fields, models
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    commission = fields.Boolean(string="commission",
-                                     default=False)
-    commission_type = fields.Selection(
-        [('default', 'Default'),
-         ('extra', 'Extra')], string='Product Commission Status')
+   public_price = fields.Float(string="Public Price" , compute="compute_public_price")
+
+    def compute_public_price(self) :
+        if self.pricelist_id : 
+            for list in self.pricelist_id :
+                if list.x_default :
+                    for item in list :
+                        self.public_price = list.item.price
+

@@ -8,8 +8,14 @@ from datetime import datetime, timedelta
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
  
-    commissions = fields.Float(string="Commission" , readOnly = True)
+    commissions = fields.Float(string="Commission" , readOnly = True , compute="compute_commissions")
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
+
+    def compute_commissions : 
+        for invoice in self.env['account.invoice']:
+            if invoice.x_sale_agent == self :
+                self.commissions += invoice.commission
+
 
     
 

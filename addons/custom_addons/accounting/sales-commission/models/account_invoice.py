@@ -1,5 +1,4 @@
 # See LICENSE file for full copyright and licensing details.
-
 from odoo import api ,fields, models
 from openerp.exceptions import ValidationError
 from datetime import datetime, timedelta
@@ -21,25 +20,18 @@ class AccountInvoice(models.Model):
                     if self.invoice_line_ids :
                         count = 0
                         for line in self.invoice_line_ids :
-                            if line.product_id.commission :
-                                count = count + line.quantity         
-                        self.commission = (count/1000)*12
-                        self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
-
+                            if line.product_id.categ_id.commission :
+                                count = count + line.quantity
+                            if line.product.public_price < line.price_unit :
+                                diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
+                            self.commission += count * line.product_id.categ_id.super_commission_rate + diff / 2
                     else :
                         if self.invoice_line_ids :
                              count = 0
                              for line in self.invoice_line_ids :
-                                 if line.product_id.commission :
-                                     count = count + line.quantity         
-                             self.commission = (count/1000)* 10
-                             self.x_sale_agent.commissions = self.x_sale_agent.commissions + self.commission
-
-
-
-
-
-
-
-
+                                 if line.product_id.categ_id.commission :
+                                    count = count + line.quantity
+                                 if line.product.public_price < line.price_unit :
+                                    diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
+                                 self.commission += count * line.product_id.categ_id.default_commission_rate + diff / 2       
 
