@@ -13,10 +13,10 @@ class HrEmployee(models.Model):
 
     @api.onchange('x_invoices')
     def compute_commissions(self) : 
-        self.ensure_one()
-        self.commissions = 0
-        for invoice in self.x_invoices :
-            self.commissions += invoice.commission
+        for record in self : 
+            record.commissions = 0
+            for invoice in record.x_invoices :
+                record.commissions += invoice.commission
                         
                 
 
