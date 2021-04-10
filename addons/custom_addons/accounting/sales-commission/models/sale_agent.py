@@ -12,9 +12,12 @@ class HrEmployee(models.Model):
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
 
     def compute_commissions(self) : 
-        for invoice in self.env['account.invoice']:
-            if invoice.x_sale_agent == self :
-                self.commissions += invoice.commission
+        if self.x_sales :
+            for order in x_sales : 
+                if order.invoice_ids :
+                    for invoice in order.invoice_ids:
+                        self.commissions += invoice.commission
+                
 
 
     
