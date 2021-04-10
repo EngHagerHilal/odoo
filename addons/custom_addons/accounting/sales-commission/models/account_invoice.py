@@ -61,5 +61,6 @@ class AccountInvoice(models.Model):
                                     diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
                                  self.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2
         else :
-            self.commission = 0       
+            self.commission = 0
+        self.x_sale_agent.commissions = self.commission    
 
