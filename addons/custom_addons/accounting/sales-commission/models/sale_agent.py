@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
  
-    commissions = fields.Float(string="Commission" , readOnly = True )
+    commissions = fields.Float(string="Commission" , readOnly = True , compute="compute_commissions")
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
 
     def compute_commissions(self) : 
