@@ -4,6 +4,7 @@ from openerp.exceptions import ValidationError
 from datetime import datetime, timedelta
 
 
+
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
@@ -38,9 +39,7 @@ class AccountInvoice(models.Model):
    
     def compute_commission(self) :
         if (self.state == 'paid'):
-            if self.write_date >= self.x_sale_agent.last_reset :
-                if ( self.payment_date < self.deadline.date() ):
-
+                if ( self.payment_date < self.deadline.date()):
                     if (self.payment_date - self.date_invoice).days <= 1 :
                         if self.invoice_line_ids :
                             count = 0
