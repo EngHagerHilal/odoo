@@ -11,12 +11,12 @@ class HrEmployee(models.Model):
     commissions = fields.Float(string="Commission" , readOnly = True , compute="compute_commissions")
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
 
-    @api.onchange('x_invoices')
-    def compute_commissions(self) : 
-        for record in self : 
-            record.commissions = 0
-            for invoice in record.x_invoices :
-                record.commissions += invoice.commission
+    #@api.onchange('x_invoices')
+    #def compute_commissions(self) : 
+     #   for record in self : 
+      #      record.commissions = 0
+       #     for invoice in record.x_invoices :
+        #        record.commissions += invoice.commission
                         
                 
 
