@@ -12,8 +12,8 @@ class HrEmployee(models.Model):
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
 
     def compute_commissions(self) : 
-        self.commissions = 0
         self.ensure_one()
+        self.commissions = 0
         for invoice in self.x_invoices :
             self.commissions += invoice.commission
                         
