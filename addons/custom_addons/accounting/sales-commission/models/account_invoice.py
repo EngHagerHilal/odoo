@@ -19,13 +19,14 @@ class AccountInvoice(models.Model):
                 if (self.write_date.date() - self.date_invoice).days <= 1 :
                     if self.invoice_line_ids :
                         count = 0
+                        diff = 0
                         for line in self.invoice_line_ids :
                             if line.product_id.categ_id.commission :
                                 count = count + line.quantity
                             if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                 diff = line.quantity * line.price_unit - line.quantity * line.product_id.public_price 
                             self.commission += count * line.product_id.categ_id.super_commission_rate + diff / 2
-                    else :
+                else :
                         if self.invoice_line_ids :
                              count = 0
                              for line in self.invoice_line_ids :

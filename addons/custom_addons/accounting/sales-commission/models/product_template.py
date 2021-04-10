@@ -10,6 +10,6 @@ class ProductTemplate(models.Model):
         if self.pricelist_id : 
             for list in self.pricelist_id :
                 if list.x_default :
-                    for item in list :
-                        self.public_price = list.item.price
+                    for item in list.item_ids :
+                        self.public_price = item.price
 

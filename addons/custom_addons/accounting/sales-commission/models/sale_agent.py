@@ -13,7 +13,7 @@ class HrEmployee(models.Model):
 
     def compute_commissions(self) : 
         if self.x_sales :
-            for order in x_sales : 
+            for order in self.x_sales : 
                 if order.invoice_ids :
                     for invoice in order.invoice_ids:
                         self.commissions += invoice.commission
