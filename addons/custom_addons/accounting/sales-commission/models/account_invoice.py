@@ -2,6 +2,7 @@
 from odoo import api ,fields, models
 from openerp.exceptions import ValidationError
 from datetime import datetime, timedelta
+from datetime import date
 
 
 
