@@ -14,7 +14,7 @@ class HrEmployee(models.Model):
     
     
     def compute_commissions(self) : 
-        invoices = self.env['account.invoice'].search(['x_sale_agent.id' , '=' , self.id])
+        invoices = self.env['account.invoice'].search([('x_sale_agent.id' , '=' , self.id)])
         com = 0 
         for invoice in invoices : 
             com += invoice.commission
