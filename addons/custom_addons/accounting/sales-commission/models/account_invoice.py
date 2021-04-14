@@ -52,7 +52,7 @@ class AccountInvoice(models.Model):
                                 if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product_id.public_price 
                                 self.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
-                                self.sale_agent.commissions += self.commission 
+                                #self.sale_agent.commissions += self.commission 
                     else :
                         if self.invoice_line_ids :
                              count = 0
@@ -62,8 +62,9 @@ class AccountInvoice(models.Model):
                                  if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
                                  self.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
-                                 self.sale_agent.commissions += self.commission  
+                                 #self.sale_agent.commissions += self.commission  
         else :
             self.commission = 0
+        return self.commission
 
 
