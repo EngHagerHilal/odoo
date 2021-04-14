@@ -19,15 +19,19 @@ class AccountInvoice(models.Model):
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
     
     def compute_deadline(self):
-        date = self.date_invoice.datetime()
+        #date = self.date_invoice
         x2 = self.date_invoice
-        if( date.day == 1 or date.day == 2 or date.day == 3 or date.day == 4) :
-            x2 = datetime(date.year, date.month , 5)
-        else :
-            if date.month != 12:
-                x2 = datetime(date.year, date.month+1 , 5)
+        if (self.date_invoice):
+            day = self.date_invoice.day
+            month = self.date_invoice.month
+            year = self.date_invoice.year
+            if( day == 1 or day == 2 or day == 3 or day == 4) :
+                x2 = datetime(year, month , 5)
             else :
-                x2 = datetime(date.year+1, 1 , 5)
+                if month != 12:
+                    x2 = datetime(year, month+1 , 5)
+                else :
+                    x2 = datetime(year+1, 1 , 5)
         self.deadline = x2
     
     def compute_payment_date(self):
