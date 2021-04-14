@@ -10,6 +10,7 @@ class HrEmployee(models.Model):
  
     commissions = fields.Float(string="Commission" , readOnly = True )
     last_reset = fields.Datetime(string="Last Date" , readOnly = True , required = True , default=datetime.now())
+    invoices = fields.One2many(comodel_name='account.invoice', inverse_name='sale_agent')
 
     
     

@@ -14,6 +14,7 @@ class AccountInvoice(models.Model):
         compute="compute_commission",
         default=0,
     )
+    sale_agent = fields.Many2one(comodel_name='hr.employee', delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , compute="compute_deadline")
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
 
@@ -36,7 +37,8 @@ class AccountInvoice(models.Model):
             for move in self.move_id :
                 if  move.date > self.payment_date :
                     self.payment_date = move.date
-                
+    
+    @api.multi           
     def compute_commission(self) :
         if (self.state == 'paid'):
                 if ( self.payment_date < self.deadline.date()):
@@ -50,7 +52,7 @@ class AccountInvoice(models.Model):
                                 if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product_id.public_price 
                                 self.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
-                                #self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                                self.sale_agent.commissions += self.commission 
                     else :
                         if self.invoice_line_ids :
                              count = 0
@@ -60,7 +62,8 @@ class AccountInvoice(models.Model):
                                  if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
                                  self.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
-                                 #self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                                 self.sale_agent.commissions += self.commission  
         else :
-            self.commission = 0   
+            self.commission = 0
+
 
