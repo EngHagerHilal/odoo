@@ -1,15 +1,14 @@
 from odoo import fields, models
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
 
     public_price = fields.Float(string="Public Price" , compute="compute_public_price")
 
     def compute_public_price(self) :
-        if self.pricelist_id : 
-            for list in self.pricelist_id :
+        if self.pricelist_item_ids : 
+            for list in self.pricelist_item_ids :
                 if list.x_default :
-                    for item in list.item_ids :
-                        self.public_price = item.price
+                    self.public_price = list.price
 

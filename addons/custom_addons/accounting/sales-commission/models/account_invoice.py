@@ -26,17 +26,17 @@ class AccountInvoice(models.Model):
             month = self.date_invoice.month
             year = self.date_invoice.year
             if( day == 1 or day == 2 or day == 3 or day == 4) :
-                x2 = datetime(year, month , 5)
+                x2 = datetime(year, month , 5 , 00,00,00)
             else :
                 if month != 12:
-                    x2 = datetime(year, month+1 , 5)
+                    x2 = datetime(year, month+1 , 5, 00,00,00)
                 else :
-                    x2 = datetime(year+1, 1 , 5)
+                    x2 = datetime(year+1, 1 , 5, 00,00,00)
         self.deadline = x2
     
     def compute_payment_date(self):
         if (self.move_id):
-            self.payment_date = self.date_invoice
+            #self.payment_date = self.date_invoice
             for move in self.move_id :
                 if  move.date > self.payment_date :
                     self.payment_date = move.date
@@ -52,7 +52,7 @@ class AccountInvoice(models.Model):
                             for line in self.invoice_line_ids :
                                 if line.product_id.categ_id.commission :
                                     count = count + line.quantity
-                                if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
+                                if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0  :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product_id.public_price 
                                 self.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
                                 #self.sale_agent.commissions += self.commission 
