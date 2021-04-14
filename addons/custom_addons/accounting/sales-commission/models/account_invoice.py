@@ -37,7 +37,6 @@ class AccountInvoice(models.Model):
                 if  move.date > self.payment_date :
                     self.payment_date = move.date
                 
-    @api.multi
     def compute_commission(self) :
         if (self.state == 'paid'):
                 if ( self.payment_date < self.deadline.date()):
@@ -51,7 +50,7 @@ class AccountInvoice(models.Model):
                                 if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product_id.public_price 
                                 self.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
-                                self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                                #self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
                     else :
                         if self.invoice_line_ids :
                              count = 0
@@ -61,7 +60,7 @@ class AccountInvoice(models.Model):
                                  if line.product_id.public_price < line.price_unit and line.product_id.public_price != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product.public_price 
                                  self.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
-                                 self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                                 #self.x_sale_agent.commissions += count * line.product_id.categ_id.default_commission_rate + diff / 2 
         else :
             self.commission = 0   
 
