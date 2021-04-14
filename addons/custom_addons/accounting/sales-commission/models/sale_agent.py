@@ -19,12 +19,12 @@ class HrEmployee(models.Model):
         for invoice in self.invoices : 
             com += invoice.compute_commission()
         self.commissions = com
-                    
+
                 
 
 
     
-
+                    
 
 
 

@@ -14,10 +14,9 @@ class AccountInvoice(models.Model):
         compute="compute_commission",
         default=0,
     )
-    sale_agent = fields.Many2one(comodel_name='hr.employee', delegate=True)
+    sale_agent = fields.Many2one(comodel_name='hr.employee', domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , compute="compute_deadline")
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
-
     
     def compute_deadline(self):
         date = self.date_invoice
@@ -66,5 +65,12 @@ class AccountInvoice(models.Model):
         else :
             self.commission = 0
         return self.commission
+
+    @api.depends('x_sales')
+    def get_sale_agent(self) :
+        if self.x_sales : 
+            self.sale_agent = self.x_sales[0].x_sale_agent
+
+
 
 
