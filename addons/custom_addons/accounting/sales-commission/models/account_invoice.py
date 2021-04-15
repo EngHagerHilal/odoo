@@ -41,7 +41,7 @@ class AccountInvoice(models.Model):
             for move in self.move_id :
                 if  move.date > payment :
                     payment = move.date
-        self.payment_date = payment
+            self.payment_date = payment
     
     @api.multi           
     def compute_commission(self) :
