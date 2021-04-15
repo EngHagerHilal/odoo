@@ -33,6 +33,7 @@ class AccountInvoice(models.Model):
                 else :
                     x2 = datetime(year+1, 1 , 5, 00,00,00)
         self.deadline = x2
+        return self.deadline
     
     def compute_payment_date(self):
         if (self.move_id):
@@ -40,6 +41,7 @@ class AccountInvoice(models.Model):
             for move in self.move_id :
                 if  move.date > payment :
                     self.payment_date = move.date
+        return self.payment_date
     
     @api.multi           
     def compute_commission(self) :
