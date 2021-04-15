@@ -37,10 +37,12 @@ class AccountInvoice(models.Model):
     
     def compute_payment_date(self):
         if (self.move_id):
-            payment = self.date_invoice
+            payment = self.move_id[0]
             for move in self.move_id :
                 if  move.date > payment :
                     self.payment_date = move.date
+        else :
+            self.payment_date = None
         return self.payment_date
     
     @api.multi           
