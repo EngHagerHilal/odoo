@@ -46,7 +46,7 @@ class AccountInvoice(models.Model):
     
     @api.multi           
     def compute_commission(self) :
-        if (self.state == 'paid' and self.payment_date):
+        if (self.state == 'paid'):
                 payment = self.payment_date
                 if ( payment < self.compute_deadline().date()):
                     if (payment - self.date_invoice).days <= 1 :

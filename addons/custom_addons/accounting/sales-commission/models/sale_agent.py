@@ -16,9 +16,8 @@ class HrEmployee(models.Model):
     
     def compute_commissions(self) : 
         com = 0
-        if self.job_id.name == 'مندوب مبيعات' :
-            for invoice in self.invoices : 
-                com += invoice.compute_commission()
+        for invoice in self.invoices : 
+            com += invoice.compute_commission()
         self.commissions = com
 
                 
