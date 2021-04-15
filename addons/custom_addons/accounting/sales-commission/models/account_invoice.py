@@ -43,13 +43,12 @@ class AccountInvoice(models.Model):
                 if  move.date > payment :
                     payment = move.date
         self.payment_date = payment
-        return self.payment_date
     
     @api.multi           
     def compute_commission(self) :
         if (self.state == 'paid'):
-                if ( self.compute_payment_date() < self.compute_deadline().date()):
-                    if (self.compute_payment_date() - self.date_invoice).days <= 1 :
+                if ( self.payment_date < self.compute_deadline().date()):
+                    if (self.payment_date - self.date_invoice).days <= 1 :
                         if self.invoice_line_ids :
                             count = 0
                             diff = 0
