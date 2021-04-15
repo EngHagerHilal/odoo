@@ -11,7 +11,6 @@ class AccountInvoice(models.Model):
 
     commission = fields.Float(
         string="Commissions",
-        compute="compute_commission",
         default=0,
     )
     sale_agent = fields.Many2one(comodel_name='hr.employee', domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
@@ -44,10 +43,11 @@ class AccountInvoice(models.Model):
                     payment = move.date
             self.payment_date = payment
     
-    @api.multi           
+    @api.onchange('state')          
     def compute_commission(self) :
         if (self.state == 'paid'):
-                payment = self.payment_date
+            payment = self.payment_date
+            if (payment):
                 if ( payment < self.compute_deadline().date()):
                     if (payment - self.date_invoice).days <= 1 :
                         if self.invoice_line_ids :
