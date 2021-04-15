@@ -2,20 +2,17 @@
 from odoo import api ,fields, models
 from openerp.exceptions import ValidationError
 from datetime import datetime, timedelta
-from datetime import date
+from datetime import date , time
 
 
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    commission = fields.Float(
-        string="Commissions",
-        default=0,
-    )
+    commission = fields.Float( string="Commissions", compute="compute_commission" ,default=0)
     sale_agent = fields.Many2one(comodel_name='hr.employee', domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , compute="compute_deadline")
-    payment_date = fields.Date(string="payment date" , readOnly = True )
+    payment_date = fields.Date(string="payment date" , readOnly = True , default=time.strftime('0000-00-00') , compute="compute_payment_date")
     
     def compute_deadline(self):
         #date = self.date_invoice
@@ -34,7 +31,6 @@ class AccountInvoice(models.Model):
         self.deadline = x2
         return self.deadline
     
-    @api.onchange('state')
     def compute_payment_date(self):
         if (self.state == 'paid'):
             payment = self.move_id[0].date
@@ -43,7 +39,6 @@ class AccountInvoice(models.Model):
                     payment = move.date
             self.payment_date = payment
     
-    @api.onchange('state')          
     def compute_commission(self) :
         if (self.state == 'paid'):
             payment = self.payment_date
