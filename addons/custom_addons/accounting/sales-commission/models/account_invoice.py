@@ -16,7 +16,7 @@ class AccountInvoice(models.Model):
     )
     sale_agent = fields.Many2one(comodel_name='hr.employee', domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , compute="compute_deadline")
-    payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
+    payment_date = fields.Date(string="payment date" , readOnly = True )
     
     def compute_deadline(self):
         #date = self.date_invoice
@@ -35,8 +35,9 @@ class AccountInvoice(models.Model):
         self.deadline = x2
         return self.deadline
     
+    @api.onchange('state')
     def compute_payment_date(self):
-        if self.state == 'paid' :
+        if (self.state == 'paid'):
             payment = self.move_id[0].date
             for move in self.move_id :
                 if  move.date > payment :
