@@ -70,10 +70,10 @@ class AccountInvoice(models.Model):
             self.commission = 0
         return self.commission
 
-    @api.depends('x_sales')
-    def get_sale_agent(self) :
-        if self.x_sales : 
-            self.sale_agent = self.x_sales[0].x_sale_agent
+    #@api.depends('x_sales')
+    #def get_sale_agent(self) :
+     #   if self.x_sales : 
+      #      self.sale_agent = self.x_sales[0].x_sale_agent
 
 
 
