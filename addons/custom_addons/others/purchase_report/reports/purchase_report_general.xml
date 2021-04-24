@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="purchase_report_general">
+        <link rel='stylesheet' href="../static/fonts/font.css"/>
+
        <t t-call="web.html_container">
               
 
@@ -58,7 +60,7 @@
                       
                     <center>
                         <b>
-                            <h3>  تقارير مشتريات  </h3>
+                            <h3 class="footer_text">  تقارير مشتريات  </h3>
                         </b>
                     </center>
                     
@@ -76,7 +78,7 @@
                     <t t-set="t_untax" t-value="0" />
                     <t t-set="t_tax" t-value="0" />
                     <t t-set="t_total" t-value="0" />
-                    <table class="table table-condensed" style="direction:rtl;">
+                    <table class="table table-condensed footer_text" style="direction:rtl;">
                     <thead>
                     <th> رقم الأمر
                     </th>
