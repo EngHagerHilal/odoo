@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_agent_commission" model="ir.ui.view">
+        <field name="name">Sale Agent Commission Report</field>
+        <field name="model">sale.agent.commission</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Sale Agent Commission Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>                   
+                    <group>
+                        <field name="agent"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_sale_agent_commission_report" string="Print" type="object" class="oe_highlight"/>
+                    OR
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_sale_agent_commission_report" model="ir.actions.act_window">
+        <field name="name">Sale Agent Commission Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.agent.commission</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sale_agent_commission"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_sale_agent_commission_report"
+              id="menu_sale__agent_commission_report"
+              parent="hr.menu_hr_reporting_timesheet"/>
+
+</odoo>

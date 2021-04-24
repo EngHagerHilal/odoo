@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="inventory_report_general">
-       <t t-call="web.html_container">
-              
-
+    <template id="sale_agent_commission.sale_agent_commission_report">
+       <t t-call="web.html_container">   
                 <style>
                     .table, .table td, .table th {
                       border: 1px solid #ddd;
@@ -58,7 +56,7 @@
                       
                     <center>
                         <b>
-                            <h3>  تقارير حركات مخزنية  </h3>
+                            <h3>  تقارير عمولات  </h3>
                         </b>
                     </center>
                     
@@ -69,85 +67,167 @@
                             <span t-esc="end_date"/>
                         </b>
                     </center>
+                   <center>
+                        <b>                            
+                        <span t-esc="agent"/>
+                        </b>
+                        
+
+                    </center>
                     <br/>
-                    <t t-set="quantity" t-value="0" />
+                    <t t-if="em_agent==1">
+                    <t t-set="total" t-value="0" />
                     <table class="table table-condensed" style="direction:rtl;">
                     <thead>
-                    <th> التاريخ 
+                    <th> رقم الفاتورة 
                     </th>
                     <th> 
+                    العميل
+                    </th>
+                    <th>
+                    تاريخ الفاتورة 
+                    </th>
+                    <th>
+                    تاريخ السداد 
+                    </th>
+ <th>
                     المنتج
                     </th>
                     <th>
-                    الكمية 
+                    الكمية
                     </th>
                     <th>
-                    اسم السائق
+                    سعر الوحدة
                     </th>
                     <th>
-                    رقم السيارة
+                    إجمالي بدون ضريبة
                     </th>
                     <th>
-                     رقم الأمر 
+الضريبة 
                     </th>
                     <th>
-                    المخزن المُحول منه
+                    الاجمالي شامل الضريبة 
                     </th>
                     <th>
-                    المخزن المُحول إليه 
+                    العمولة 
                     </th>
                     
            </thead>
            
            <tbody>
-           <tr t-foreach="data" t-as="order" >
-           <td> 
-           <span t-esc="order['date']" />
-           </td>
-<td>
-<span t-esc="order['product']" />
-           </td>
-<td>
-<span t-esc="order['quantity']" />
-<t t-set="quantity" t-value="quantity+order['quantity']" />
+          
+           <tr t-foreach="commissions" t-as="order" >
+           
+<td> 
+    <span t-esc="order['name']" />
 </td>
 <td>
-<span t-esc="order['driver']" />
+<span t-esc="order['customer']" />
+</td>
+<td>
+<span t-esc="order['date']" />
+</td>
+
+<td>
+<span t-esc="order['payment']" />
+</td>
+
+<td>
+<span t-esc="order['product']" />
+</td>
+<td>
+<span t-esc="order['unit_price']" />
+</td>
+<td>
+<span t-esc="order['quantity']" />
+</td>
+
+
+
+<td>
+<span t-esc="order['untaxed']" />
            </td>
 <td>
-<span t-esc="order['car']" />
+<span t-esc="order['taxed']" />
            </td>
 <td>
-<span t-esc="order['picking']" />
-           </td>
-<td>
-<span t-esc="order['source']" />
-           </td>
-<td>
-<span t-esc="order['dest']" />
-           </td>
-           </tr>
-           
-           <tr>
-           <td colspan="6">
-           الإجمالي
+<span t-esc="order['total']" />
            </td>
            <td>
-           <span t-esc="quantity" />
-           </td>
-
-          <td colspan="6"> 
-           
-           </td>
+<span t-esc="order['commission']" />
+ <t t-set="total" t-value="total+order['commission']" />
+</td>
            </tr>
-
-
+          <tr>
+     <td colspan="10"> الاجمالي  </td>
+     <td >  <span t-esc="total" /> </td>
+     </tr> 
            </tbody>
+                    </table>   
+                    </t>
 
-                    </table>
-                     
+                    <t t-if="em_driver==1" >
+                    <t t-set="total" t-value="0" />
+                    <table class="table table-condensed" style="direction:rtl;">
+                    <thead>
+                    <th> رقم الأمر 
+                    </th>
+                    <th> 
+                    العميل
+                    </th>
+                    <th>
+                    التاريخ  
+                    </th>
+                    <th>
+                   المخزن
+                    </th>
+                    <th>
+                    المنتج
+                    </th>
+                    <th>
+                    الكمية
+                    </th>
+                    <th>
+                    العمولة 
+                    </th>
+                    
+           </thead>
+           
+           <tbody>
+          
+           <tr t-foreach="commissions" t-as="order" >
+           
+<td> 
+    <span t-esc="order['name']" />
+</td>
+<td>
+<span t-esc="order['customer']" />
+</td>
+<td>
+<span t-esc="order['date']" />
+</td>
+<td>
+<span t-esc="order['location']" />
+</td>
+<td>
+<span t-esc="order['product']" />
+</td>
+<td>
+<span t-esc="order['quantity']" />
+</td>
+<td>
+<span t-esc="order['commission']" />
+ <t t-set="total" t-value="total+order['commission']" />
+</td>
+           </tr>
+     <tr>
+     <td colspan="6"> الاجمالي  </td>
+     <td >  <span t-esc="total" /> </td>
+     </tr>     
+           </tbody>
+                    </table> 
+                     </t>         
                 </div>
             </t>
-
     </template>
 </odoo>
