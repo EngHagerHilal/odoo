@@ -71,6 +71,12 @@
                         </b>
                     </center>
                     <br/>
+                    <t t-set="t_ordered" t-value="0" />
+                    <t t-set="t_delivered" t-value="0" />
+                    <t t-set="t_untax" t-value="0" />
+                    <t t-set="t_tax" t-value="0" />
+                    <t t-set="t_total" t-value="0" />
+                    
                     <table class="table table-condensed" style="direction:rtl;">
                     <thead>
                     <th> رقم الأمر
@@ -96,12 +102,16 @@
                     <th>
                     الكمية المستلمة
                     </th>
+                   
                     <th>
                     اسم السائق
                     </th>
                     <th>
                     رقم السيارة
                     </th>
+                   <th>
+                   سعر الوحدة
+                   </th>
                     <th>
                     الإجمالي بدون ضرائب
                     </th>
@@ -111,7 +121,12 @@
                     <th>
                     الإجمالي
                     </th>
-                    
+                    <th>
+                    رقم الفاتورة
+                    </th>
+                    <th>
+                    تاريخ السداد
+                    </th>
            </thead>
            
            <tbody>
@@ -137,9 +152,13 @@
            </td>
 <td>
 <span t-esc="order['quantity']" />
-           </td>
+<t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
+
+</td>
 <td>
 <span t-esc="order['received']" />
+<t t-set="t_delivered" t-value="t_delivered+order['received']" />
+
            </td>
 <td>
 <span t-esc="order['driver']" />
@@ -148,17 +167,44 @@
 <span t-esc="order['car']" />
 </td>
 <td>
+<span t-esc="order['unit_price']" />
+</td>
+<td>
 <span t-esc="order['price_sub']" />
+<t t-set="t_untax" t-value="t_untax+order['price_sub']" />
            </td>
 <td>
 <span t-esc="order['price_tax']" />
-           </td>
+<t t-set="t_tax" t-value="t_tax+order['price_tax']" />
+
+</td>
 <td>
 <span t-esc="order['price_total']" />
+<t t-set="t_total" t-value="t_total+order['price_total']" />
+</td>
+<td>
+<span t-esc="order['invoice']" />
+</td>
+
+<td>
+<t t-if="order['state']=='paid'">
+<span t-esc="order['payment']" />
+</t>
 </td>
            </tr>
+           <tr>
+            
+            <td colspan="6"> الاجمالي  </td>
+            <td> <span t-esc="t_ordered" /> </td>
+            <td> <span t-esc="t_delivered" /> </td> 
+            <td colspan="3"> </td>
+            <td><span t-esc="t_untax" /> </td>
+            <td> <span t-esc="t_tax" /> </td>
+            <td> <span t-esc="t_total" /> </td>
+            <td colspan="2"> </td>            
+           </tr>
            </tbody>
-                    </table>               
+                    </table>             
                 </div>
             </t>
 

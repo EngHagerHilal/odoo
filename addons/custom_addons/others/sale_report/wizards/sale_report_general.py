@@ -53,6 +53,7 @@ class SaleReportVendor(models.TransientModel):
                         'product' : move.product_id.name,
                         'quantity' : move.product_uom_qty	,
                         'received' : move.qty_delivered ,
+                        'unit_price' : move.price_unit ,
                         'price_sub' : move.price_subtotal ,
                         'price_tax' : move.price_tax ,
                         'price_total' : move.price_total ,
@@ -62,6 +63,9 @@ class SaleReportVendor(models.TransientModel):
                         'customer' : order.partner_id.name ,
                         'agent' : order.x_sale_agent.name ,
                         'balance' : order.x_balance ,
+                        'invoice' : order.invoice_ids[0].number ,
+                        'state' : order.invoice_ids[0].state ,
+                        'payment' : order.invoice_ids[0].compute_payment_date() ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax

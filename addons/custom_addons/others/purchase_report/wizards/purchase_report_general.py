@@ -52,6 +52,7 @@ class PurchaseReportVendor(models.TransientModel):
                         'product' : move.product_id.name,
                         'quantity' : move.product_qty	,
                         'received' : move.qty_received ,
+                        'unit_price' : move.price_unit ,
                         'price_sub' : move.price_subtotal ,
                         'price_tax' : move.price_tax ,
                         'price_total' : move.price_total ,
