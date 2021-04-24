@@ -129,14 +129,14 @@
            </tr>
            
            <tr>
-           <td colspan="6">
+           <td colspan="2">
            الإجمالي
            </td>
            <td>
            <span t-esc="quantity" />
            </td>
 
-          <td colspan="6"> 
+          <td colspan="5"> 
            
            </td>
            </tr>

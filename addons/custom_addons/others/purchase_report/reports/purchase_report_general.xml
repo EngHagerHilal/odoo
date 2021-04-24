@@ -17,7 +17,7 @@
                     }
 
                     .table th, .table td {
-                      padding: 10px;
+                      padding: 5px;
                     }
 
                     .salesperson{
@@ -172,14 +172,14 @@
            </tr>
            <tr>
             
-            <td colspan="6"> الاجمالي  </td>
+            <td colspan="5"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
             <td colspan="3"> </td>
             <td><span t-esc="t_untax" /> </td>
             <td> <span t-esc="t_tax" /> </td>
             <td> <span t-esc="t_total" /> </td>
-            <td colspan="2"> </td>            
+                     
 
            </tr>
 
