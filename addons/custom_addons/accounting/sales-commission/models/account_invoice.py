@@ -10,6 +10,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
+    sale_order = fields.Many2one(comodel_name='sale.order', store = True, default =self.env['sale.order'].search([('name' , '=' , self.origin)])[0] ,delegate=True)
     sale_agent = fields.Many2one(comodel_name='hr.employee', store = True, domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True ,   compute="compute_deadline")
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
