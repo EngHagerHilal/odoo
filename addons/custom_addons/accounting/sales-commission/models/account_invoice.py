@@ -10,7 +10,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
-    sale_order = fields.many2many(
+    sale_order = fields.Many2many(
             'sale.order', 'sale_order_invoice_rel', 'invoice_id',
             'order_id', 'Sale Orders', readonly=True,
             help="This is the list of sale orders related to this invoice.")
