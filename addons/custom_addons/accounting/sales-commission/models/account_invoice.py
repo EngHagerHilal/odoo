@@ -9,12 +9,9 @@ from datetime import date , time
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+
     commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
-    sale_order = fields.Many2many(
-            'sale.order', 'sale_order_invoice_rel', 'invoice_id',
-            'order_id', 'Sale Orders', readonly=True,
-            help="This is the list of sale orders related to this invoice.")
-    sale_agent = fields.Many2one(comodel_name='hr.employee', store = True, related='sale_order.x_sale_agent',domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
+    sale_agent = fields.Many2one(comodel_name='hr.employee', store = True, related='sale_id.x_sale_agent',domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True ,   compute="compute_deadline")
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
     

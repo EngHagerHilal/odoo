@@ -59,6 +59,7 @@ class PurchaseOrder(models.Model):
             else:
                 order.invoice_status = 'no'
 
+
     @api.depends('order_line.invoice_lines.invoice_id')
     def _compute_invoice(self):
         for order in self:
@@ -413,6 +414,7 @@ class PurchaseOrder(models.Model):
             'default_company_id': self.company_id.id,
             'company_id': self.company_id.id
         }
+        
         # choose the view_mode accordingly
         if len(self.invoice_ids) > 1 and not create_bill:
             result['domain'] = "[('id', 'in', " + str(self.invoice_ids.ids) + ")]"

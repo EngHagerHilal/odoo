@@ -19,6 +19,7 @@ class AccountInvoice(models.Model):
         string='Auto-Complete'
     )
 
+
     @api.onchange('vendor_bill_purchase_id')
     def _onchange_bill_purchase_order(self):
         if not self.vendor_bill_purchase_id:
