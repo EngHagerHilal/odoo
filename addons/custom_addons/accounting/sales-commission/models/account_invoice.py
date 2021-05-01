@@ -10,7 +10,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
-    sale_agent = fields.Many2one(comodel_name='hr.employee', store = True,domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True )
+    #sale_agent = fields.Many2one(comodel_name='hr.employee', store = True,domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True )
     deadline = fields.Datetime(string="Deadline" , readOnly = True ,   compute="compute_deadline")
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
     
@@ -73,10 +73,7 @@ class AccountInvoice(models.Model):
             self.commission = 0
         return self.commission
 
-    #@api.depends('x_sales')
-    #def get_sale_agent(self) :
-     #   if self.x_sales : 
-      #      self.sale_agent = self.x_sales[0].x_sale_agent
+    
 
 
 
