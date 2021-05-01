@@ -17,8 +17,8 @@ class AccountInvoice(models.Model):
     
     def compute_sale_order(self):
         origin = self.origin
-        if (origin):
-            sales = self.env['sale.order'].search([('name' , '=' , origin)])
+        if (self.origin):
+            sales = self.env['sale.order'].search([('name' , '=' , self.origin)])
         if len(sales) > 0:
             self.sale_order = sales[0]
         return self.sale_order
