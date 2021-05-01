@@ -16,7 +16,8 @@ class AccountInvoice(models.Model):
     payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
     
     def compute_sale_order(self) :
-        sales = self.env['sale.order'].search([('name' , '=' , self.origin)])
+        origin = self.origin
+        sales = self.env['sale.order'].search([('name' , '=' , origin)])
         if len(sales) > 0:
             self.sale_order = sales[0]
         return self.sale_order
