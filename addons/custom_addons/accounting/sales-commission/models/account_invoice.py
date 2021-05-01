@@ -19,7 +19,7 @@ class AccountInvoice(models.Model):
         sales = self.env['sale.order'].search([('name' , '=' , self.origin)])
         if len(sales) > 0:
             self.sale_order = sales[0]
-        return sale_order
+        return self.sale_order
 
     def compute_deadline(self):
         #date = self.date_invoice
