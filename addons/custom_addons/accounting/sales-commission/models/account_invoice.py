@@ -13,8 +13,7 @@ class AccountInvoice(models.Model):
     commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
     sale_id = fields.Many2one(
         comodel_name='sale.order',
-        string='Add Sale Order',
-        readonly=True, states={'draft': [('readonly', False)]},
+        string='Sale Order'
     )
     sale_agent = fields.Many2one(comodel_name='hr.employee', store = True, related='sale_id.x_sale_agent',domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True ,   compute="compute_deadline")
