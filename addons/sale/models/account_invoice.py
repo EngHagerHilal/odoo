@@ -6,11 +6,7 @@ from odoo import api, fields, models, _
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
-    sale_id = fields.Many2one(
-        comodel_name='sale.order',
-        string='Add Sale Order',
-        readonly=True, states={'draft': [('readonly', False)]},
-    )
+   
 
     @api.model
     def _get_default_team(self):
