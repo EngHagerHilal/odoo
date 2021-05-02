@@ -19,8 +19,9 @@ class AccountInvoice(models.Model):
     def compute_sale_order(self):
         for invoice in self:
             if invoice.type == 'out_invoice' :
-            sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
-            invoice.sale_id = sale[0]
+                sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
+                if len(sale) > 0 :
+                    invoice.sale_id = sale[0]
             
 
 
