@@ -19,7 +19,7 @@ class HrEmployee(models.Model):
                 com += invoice.commission
         if self.x_transfers :
             for transfer in self.x_transfers :
-                com += transfer.compute_commission()
+                com += transfer.commission
         self.commissions = com
         return self.commissions
 
