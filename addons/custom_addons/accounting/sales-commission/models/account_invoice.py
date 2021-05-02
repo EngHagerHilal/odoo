@@ -48,7 +48,7 @@ class AccountInvoice(models.Model):
     def compute_commission(self) :
         for record in self :
             if (record.state == 'paid' and record.type == 'out_invoice'):
-                payment = self.payment_date
+                payment = record.payment_date
                 if ( payment < record.deadline.date()):
                     if (payment - record.date_invoice).days <= 1 :
                         if record.invoice_line_ids :
