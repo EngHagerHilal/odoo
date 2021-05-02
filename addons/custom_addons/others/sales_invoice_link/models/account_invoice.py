@@ -13,11 +13,12 @@ class AccountInvoice(models.Model):
         string='Sale Order',
         readonly=True,
         compute = "compute_sale_order" ,
-        required = False     )
+        required = False  )
 
     @api.depends('origin')
     def compute_sale_order(self):
         for invoice in self:
+            if invoice.type == 'out_invoice' :
             sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
             invoice.sale_id = sale[0]
             

@@ -20,8 +20,8 @@ class AccountInvoice(models.Model):
     def compute_deadline(self):
         #date = self.date_invoice
         #for record in self :
-        x2 = self.date_invoice
-        if (self.date_invoice and self.type == 'in_invoice'):
+        x2 = False
+        if (self.date_invoice and self.type == 'out_invoice'):
             day = self.date_invoice.day
             month = self.date_invoice.month
             year = self.date_invoice.year
@@ -37,8 +37,8 @@ class AccountInvoice(models.Model):
     
     def compute_payment_date(self):
         #for record in self : 
-        payment = date(2021,1,1)
-        if (self.state == 'paid' and self.type == 'in_invoice'):
+        payment = False
+        if (self.state == 'paid' and self.type == 'out_invoice'):
             payment = self.move_id[0].date
             for move in self.move_id :
                 if  move.date > payment :
@@ -48,7 +48,7 @@ class AccountInvoice(models.Model):
     
     def compute_commission(self) :
         #for record in self :
-        if (self.state == 'paid' and self.type == 'in_invoice'):
+        if (self.state == 'paid' and self.type == 'out_invoice'):
             payment = self.payment_date
             if ( payment < self.deadline.date()):
                 if (payment - self.date_invoice).days <= 1 :
