@@ -11,6 +11,7 @@ class StockPicking(models.Model):
 
     commission = fields.Float( string="Commissions", compute="compute_commission" , store=True, default=0)
     
+    @api.depends('state')
     def compute_commission(self) :
         for record in self :
             if (record.state == 'done'):

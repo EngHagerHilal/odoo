@@ -50,7 +50,7 @@ class SaleAgentCommission(models.TransientModel):
                         'name' : invoice.name,
                         'customer' : invoice.partner_id.name,
                         'date' : invoice.date_done,
-                        'commission' : invoice.compute_commission() ,
+                        'commission' : invoice.commission ,
                         'location' : invoice.location_id.name ,
                         'product' : invoice.move_lines[0].product_id.name ,
                         'quantity' : invoice.move_lines[0].quantity_done ,
