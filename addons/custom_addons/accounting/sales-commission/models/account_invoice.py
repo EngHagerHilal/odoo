@@ -51,7 +51,7 @@ class AccountInvoice(models.Model):
         #for record in self :
         if (self.state == 'paid' and self.type == 'out_invoice'):
             payment = self.payment_date
-            if ( payment < self.deadline.date()):
+            if ( payment < self.compute_deadline().date()):
                 if (payment - self.date_invoice).days <= 1 :
                     if self.invoice_line_ids :
                         count = 0
