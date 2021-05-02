@@ -33,7 +33,7 @@ class AccountInvoice(models.Model):
                     x2 = datetime(year, month+1 , 5, 00,00,00)
                 else :
                     x2 = datetime(year+1, 1 , 5, 00,00,00)
-        self.deadline = x2
+            self.deadline = x2
         return self.deadline
     
     def compute_payment_date(self):
