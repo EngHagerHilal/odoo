@@ -10,7 +10,7 @@
     'maintainer': 'Leen.',
     'summary': 'generate link between the invoice and the sale order and vise versa',
     'depends': [
-        'sale', 'accounting'
+        'sale', 'account'
     ],
     'data': [
     ],
