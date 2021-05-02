@@ -63,7 +63,8 @@ class PurchaseReportVendor(models.TransientModel):
                         'balance' : order.x_balance ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
-                        'taxed' : order.amount_tax
+                        'taxed' : order.amount_tax ,
+                        'invoice' : order.invoice_ids[0].number
                     })
         
         datas = {
