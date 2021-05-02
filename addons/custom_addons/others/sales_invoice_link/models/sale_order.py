@@ -13,6 +13,6 @@ class SaleOrder(models.Model):
                             relation='sale_invoice_link',
                             column1='sale_order_id',
                             column2='invoice_id')
-    invoices = fields.One2many(comodel_name='sale.order', inverse_name='sale_id' , String = 'Invoices')
+    invoices = fields.One2many(comodel_name='account.invoice', inverse_name='sale_id' , String = 'Invoices')
 
                             
