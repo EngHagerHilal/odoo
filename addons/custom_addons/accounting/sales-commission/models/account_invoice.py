@@ -17,24 +17,22 @@ class AccountInvoice(models.Model):
     
     
 
+    @api.depends('date_invoice' )
     def compute_deadline(self):
-        #date = self.date_invoice
-        #for record in self :
-        #x1 = self.date_invoice
-        #x2 = datetime.combine(self.date_invoice, datetime.min.time())
-        if (self.date_invoice and self.type == 'out_invoice'):
-            day = self.date_invoice.day
-            month = self.date_invoice.month
-            year = self.date_invoice.year
-            if( day == 1 or day == 2 or day == 3 or day == 4) :
-                x2 = datetime(year, month , 5 , 00,00,00)
-            else :
-                if month != 12:
-                    x2 = datetime(year, month+1 , 5, 00,00,00)
+        for invoice in self :
+            if (invoice.date_invoice and invoice.type == 'out_invoice'):
+                day = invoice.date_invoice.day
+                month = invoice.date_invoice.month
+                year = invoice.date_invoice.year
+                if( day == 1 or day == 2 or day == 3 or day == 4) :
+                    x2 = datetime(year, month , 5 , 00,00,00)
                 else :
-                    x2 = datetime(year+1, 1 , 5, 00,00,00)
-            self.deadline = x2
-        return self.deadline
+                    if month != 12:
+                        x2 = datetime(year, month+1 , 5, 00,00,00)
+                    else :
+                        x2 = datetime(year+1, 1 , 5, 00,00,00)
+                invoice.deadline = x2
+        #return self.deadline
     
     @api.depends('state' , 'type')
     def compute_payment_date(self):
