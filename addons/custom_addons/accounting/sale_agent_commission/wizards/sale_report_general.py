@@ -42,6 +42,7 @@ class SaleAgentCommission(models.TransientModel):
                 transfers = self.agent.x_transfers
                 Em_driver = 1 
                 filtered_transfers = list(filter(lambda x: x.date_done and x.date_done.date() >= self.start_date and x.date_done.date() <= self.end_date , transfers))
+                commissions = []
                 if len(filtered_transfers) != 0 :
                     for invoice in filtered_transfers :
                         commissions.append ({
