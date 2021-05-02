@@ -206,6 +206,10 @@
            </tbody>
                     </table>             
                 </div>
+                <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
+               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
+
             </t>
 
     </template>
