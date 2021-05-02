@@ -36,16 +36,16 @@ class AccountInvoice(models.Model):
             self.deadline = x2
         return self.deadline
     
+    @api.depends('state' , 'type')
     def compute_payment_date(self):
-        #for record in self : 
-        payment = date(2021,1,1)
-        if (self.state == 'paid' and self.type == 'out_invoice'):
-            payment = self.move_id[0].date
-            for move in self.move_id :
-                if  move.date > payment :
-                    payment = move.date
-        self.payment_date = payment
-        return self.payment_date
+        for record in self : 
+            if (record.state == 'paid' and record.type == 'out_invoice'):
+                payment = record.move_id[0].date
+                for move in record.move_id :
+                    if  move.date > payment :
+                        payment = move.date
+                record.payment_date = payment
+        
     
     def compute_commission(self) :
         #for record in self :
