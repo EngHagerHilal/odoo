@@ -24,7 +24,7 @@ class SaleAgentCommission(models.TransientModel):
         if transfers :
             Em_driver = 1 
         #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
-        filtered_invoices = list(filter(lambda x: x.compute_payment_date() >= self.start_date and x.compute_payment_date() <= self.end_date , invoices))
+        filtered_invoices = list(filter(lambda x: x.payment_date >= self.start_date and x.payment_date <= self.end_date , invoices))
         filtered_transfers = list(filter(lambda x: x.date_done and x.date_done.date() >= self.start_date and x.date_done.date() <= self.end_date , transfers))
 
         commissions = []
@@ -34,8 +34,8 @@ class SaleAgentCommission(models.TransientModel):
                     'name' : invoice.number,
                     'customer' : invoice.partner_id.name,
                     'date' : invoice.date_invoice,
-                    'payment' : invoice.compute_payment_date(),
-                    'commission' : invoice.compute_commission() ,
+                    'payment' : invoice.payment_date,
+                    'commission' : invoice.commission ,
                     'product' : invoice.invoice_line_ids[0].product_id.name ,
                     'unit_price' : invoice.invoice_line_ids[0].price_unit ,
                     'quantity' : invoice.invoice_line_ids[0].quantity ,
