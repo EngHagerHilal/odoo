@@ -17,6 +17,14 @@ class AccountInvoice(models.Model):
         comodel_name='sale.order',
         string='Sale Order',
         readonly=True,
+        compute = "compute_sale_order"
     )
+
+    @api.depends('origin')
+    def _compute_invoice(self):
+        for invoice in self:
+            sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
+            invoice.sale_id = sale[0]
+
 
 
