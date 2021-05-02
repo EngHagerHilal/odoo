@@ -46,6 +46,10 @@ class PurchaseReportVendor(models.TransientModel):
                     driver = order.x_paid_driver
                 else :
                     driver = ""
+            if len(order.invoice_ids) > 0 :
+                invoice = order.invoice_ids[0].number 
+            else :
+                invoice = "غير مفوتر"
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
@@ -66,7 +70,7 @@ class PurchaseReportVendor(models.TransientModel):
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax ,
-                        'invoice' : order.invoice_ids[0].number
+                        'invoice' : invoice
                     })
         
         datas = {
