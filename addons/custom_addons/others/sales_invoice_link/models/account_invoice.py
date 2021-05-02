@@ -13,5 +13,7 @@ class AccountInvoice(models.Model):
                             relation='sale_invoice_link',
                             column1='invoice_id',
                             column2='sale_order_id')
+    sale_id = fields.Many2one(comodel_name='sale.order', delegate=True)
+
 
 
