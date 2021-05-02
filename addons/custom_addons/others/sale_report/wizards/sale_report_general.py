@@ -48,7 +48,7 @@ class SaleReportVendor(models.TransientModel):
             if len(order.invoice_ids) > 0 :
                 invoice = order.invoice_ids[0].number
                 state = order.invoice_ids[0].state
-                paid = order.invoice_ids[0].compute_payment_date() 
+                paid = order.invoice_ids[0].payment_date 
             else :
                 invoice = 'غير مفوتر'
                 state = 'غير مفوتر'
@@ -71,9 +71,9 @@ class SaleReportVendor(models.TransientModel):
                         'customer' : order.partner_id.name ,
                         'agent' : order.x_sale_agent.name ,
                         'balance' : order.x_balance ,
-                        'invoice' : order.invoice_ids[0].number ,
-                        'state' : order.invoice_ids[0].state ,
-                        'payment' : order.invoice_ids[0].compute_payment_date() ,
+                        'invoice' : invoice ,
+                        'state' : state ,
+                        'payment' : paid ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax
