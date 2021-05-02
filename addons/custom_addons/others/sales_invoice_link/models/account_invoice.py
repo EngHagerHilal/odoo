@@ -12,17 +12,14 @@ class AccountInvoice(models.Model):
         comodel_name='sale.order',
         string='Sale Order',
         readonly=True,
-        compute = "compute_sale_order"
-    )
+        compute = "compute_sale_order" ,
+        required = False     )
 
     @api.depends('origin')
     def compute_sale_order(self):
         for invoice in self:
-            if invoice.type == 'in_invoice' or invoice.type == 'in_refund']:
-                sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
-                invoice.sale_id = sale[0]
-            else :
-                invoice.sale_id = False
-
+            sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
+            invoice.sale_id = sale[0]
+            
 
 
