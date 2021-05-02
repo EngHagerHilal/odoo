@@ -44,36 +44,35 @@ class AccountInvoice(models.Model):
                         payment = move.date
                 record.payment_date = payment
         
-    
+    @api.depends('state' , 'type')
     def compute_commission(self) :
-        #for record in self :
-        if (self.state == 'paid' and self.type == 'out_invoice'):
-            payment = self.payment_date
-            if ( payment < self.deadline.date()):
-                if (payment - self.date_invoice).days <= 1 :
-                    if self.invoice_line_ids :
-                        count = 0
-                        diff = 0
-                        for line in self.invoice_line_ids :
-                            if line.product_id.categ_id.commission :
-                                count = count + line.quantity
-                            if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0  :
-                                diff = line.quantity * line.price_unit - line.quantity * line.product_id.compute_public_price()
-                            self.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
-                        #self.sale_agent.commissions += self.commission 
-                else :
-                    if self.invoice_line_ids :
-                        count = 0
-                        for line in self.invoice_line_ids :
-                            if line.product_id.categ_id.commission :
-                                count = count + line.quantity
-                            if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0 :
-                                diff = line.quantity * line.price_unit - line.quantity * line.product.compute_public_price() 
-                            self.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
-                         #self.sale_agent.commissions += self.commission  
-        else :
-            self.commission = 0
-        return self.commission
+        for record in self :
+            if (record.state == 'paid' and record.type == 'out_invoice'):
+                payment = self.payment_date
+                if ( payment < record.deadline.date()):
+                    if (payment - record.date_invoice).days <= 1 :
+                        if record.invoice_line_ids :
+                            count = 0
+                            diff = 0
+                            for line in record.invoice_line_ids :
+                                if line.product_id.categ_id.commission :
+                                    count = count + line.quantity
+                                if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0  :
+                                    diff = line.quantity * line.price_unit - line.quantity * line.product_id.compute_public_price()
+                                record.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
+                            #self.sale_agent.commissions += self.commission 
+                    else :
+                        if record.invoice_line_ids :
+                            count = 0
+                            for line in record.invoice_line_ids :
+                                if line.product_id.categ_id.commission :
+                                    count = count + line.quantity
+                                if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0 :
+                                    diff = line.quantity * line.price_unit - line.quantity * line.product.compute_public_price() 
+                                record.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                            #self.sale_agent.commissions += self.commission  
+            else :
+                record.commission = 0
 
     #@api.depends('x_sales')
     #def get_sale_agent(self) :
