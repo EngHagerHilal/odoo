@@ -18,7 +18,7 @@ class AccountInvoice(models.Model):
     @api.depends('origin')
     def compute_sale_order(self):
         for invoice in self:
-            if invoice.type in ['in_invoice', 'in_refund']:
+            if invoice.type == 'in_invoice' or invoice.type == 'in_refund']:
                 sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
                 invoice.sale_id = sale[0]
 
