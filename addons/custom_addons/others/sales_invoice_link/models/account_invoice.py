@@ -21,6 +21,8 @@ class AccountInvoice(models.Model):
             if invoice.type == 'in_invoice' or invoice.type == 'in_refund']:
                 sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
                 invoice.sale_id = sale[0]
+            else :
+                invoice.sale_id = False
 
 
 
