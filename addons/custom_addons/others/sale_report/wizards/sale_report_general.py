@@ -45,6 +45,14 @@ class SaleReportVendor(models.TransientModel):
             else:
                 if order.x_paid_driver : 
                     driver = order.x_paid_driver
+            if len(order.invoice_ids) > 0 :
+                invoice = order.invoice_ids[0].number
+                state = order.invoice_ids[0].state
+                paid = order.invoice_ids[0].compute_payment_date() 
+            else :
+                invoice = 'غير مفوتر'
+                state = 'غير مفوتر'
+                paid = 'غير مفوتر'
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
