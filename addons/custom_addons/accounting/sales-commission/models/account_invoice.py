@@ -20,7 +20,7 @@ class AccountInvoice(models.Model):
     def compute_deadline(self):
         #date = self.date_invoice
         #for record in self :
-        x2 = self.date_invoice
+        x2 = datetime.combine(self.date_invoice, datetime.min.time())
         if (self.date_invoice and self.type == 'out_invoice'):
             day = self.date_invoice.day
             month = self.date_invoice.month
