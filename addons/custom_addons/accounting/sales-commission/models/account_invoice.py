@@ -10,10 +10,10 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
 
-    commission = fields.Float( string="Commissions", compute="compute_commission" , default=0)
+    commission = fields.Float( string="Commissions", compute="compute_commission" , store=True, default=0)
     sale_agent = fields.Many2one(comodel_name='hr.employee', related='sale_id.x_sale_agent', readonly=False, states={'paid': [('readonly', True)]} , domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
-    deadline = fields.Datetime(string="Deadline" , readOnly = True ,   compute="compute_deadline")
-    payment_date = fields.Date(string="payment date" , readOnly = True , compute="compute_payment_date")
+    deadline = fields.Datetime(string="Deadline" , readOnly = True , store = True , compute="compute_deadline")
+    payment_date = fields.Date(string="payment date" , readOnly = True , store = True , compute="compute_payment_date")
     
     
 
@@ -51,7 +51,7 @@ class AccountInvoice(models.Model):
         #for record in self :
         if (self.state == 'paid' and self.type == 'out_invoice'):
             payment = self.payment_date
-            if ( payment < self.compute_deadline().date()):
+            if ( payment < self.deadline.date()):
                 if (payment - self.date_invoice).days <= 1 :
                     if self.invoice_line_ids :
                         count = 0
