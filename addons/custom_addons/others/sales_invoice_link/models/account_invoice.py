@@ -21,7 +21,7 @@ class AccountInvoice(models.Model):
     )
 
     @api.depends('origin')
-    def _compute_invoice(self):
+    def compute_sale_order(self):
         for invoice in self:
             sale = self.env['sale.order'].search([('name' , '=' , invoice.origin)])
             invoice.sale_id = sale[0]
