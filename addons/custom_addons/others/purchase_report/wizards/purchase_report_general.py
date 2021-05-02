@@ -44,6 +44,8 @@ class PurchaseReportVendor(models.TransientModel):
             else:
                 if order.x_paid_driver : 
                     driver = order.x_paid_driver
+                else :
+                    driver = ""
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
