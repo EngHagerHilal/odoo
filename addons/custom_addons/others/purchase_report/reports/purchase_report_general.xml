@@ -82,6 +82,12 @@
                     <thead>
                     <th> رقم الأمر
                     </th>
+                    <th>
+                    رقم الفاتورة
+                    </th>
+                    <th>
+                    رقم سند الاستلام
+                    </th>
                     <th> 
                     التاريخ
                     </th>
@@ -118,9 +124,7 @@
                     <th>
                     الإجمالي
                     </th>
-                    <th>
-                    رقم الفاتورة
-                    </th>
+                    
            </thead>
            
            <tbody>
@@ -129,7 +133,12 @@
 <td> 
     <span t-esc="order['name']" />
 </td>
-                  
+<td>
+<span t-esc="order['invoice']" />
+</td>
+<td>
+<span t-esc="order['stock']" />
+</td>                  
 <td>
 <span t-esc="order['date']" />
            </td>
@@ -172,28 +181,26 @@
 <span t-esc="order['price_total']" />
 <t t-set="t_total" t-value="t_total+order['price_total']" />
 </td>
-<td>
-<span t-esc="order['invoice']" />
-</td>
+
            </tr>
            
            <tr>
             
-            <td colspan="5"> الاجمالي  </td>
+            <td colspan="7"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
             <td colspan="3"> </td>
             <td><span t-esc="t_untax" /> </td>
             <td> <span t-esc="t_tax" /> </td>
             <td> <span t-esc="t_total" /> </td>
-            <td colspan="1"> </td>         
+                     
 
            </tr>
 
            </tbody>
                     </table>     
-                <t t-set="user" t-value="user"/>
-                <span t-esc="user.name" /> 
+               <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
 
 

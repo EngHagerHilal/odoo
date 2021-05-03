@@ -47,9 +47,17 @@ class PurchaseReportVendor(models.TransientModel):
                 else :
                     driver = ""
             if len(order.invoice_ids) > 0 :
-                invoice = order.invoice_ids[0].number 
+                invoice = []
+                for inv in order.invoice_ids :
+                    inv.append(invoice.number)
             else :
                 invoice = "غير مفوتر"
+            if len(order.picking_ids) > 0 :
+                stock = []
+                for inv in order.picking_ids :
+                    stock.append(inv.name)
+            else :
+                stock = "غير مسلَّم"
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
@@ -70,7 +78,8 @@ class PurchaseReportVendor(models.TransientModel):
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax ,
-                        'invoice' : invoice
+                        'invoice' : invoice ,
+                        'stock' : stock
                     })
         
         datas = {

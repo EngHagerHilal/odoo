@@ -136,10 +136,10 @@
 <span t-esc="order['product']" />
 </td>
 <td>
-<span t-esc="order['unit_price']" />
+<span t-esc="order['quantity']" />
 </td>
 <td>
-<span t-esc="order['quantity']" />
+<span t-esc="order['unit_price']" />
 </td>
 
 
