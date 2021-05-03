@@ -49,7 +49,7 @@ class PurchaseReportVendor(models.TransientModel):
             if len(order.invoice_ids) > 0 :
                 invoice = []
                 for inv in order.invoice_ids :
-                    inv.append(invoice.number)
+                    invoice.append(invoice.number)
             else :
                 invoice = "غير مفوتر"
             if len(order.picking_ids) > 0 :
