@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="inventory_general_report" model="ir.ui.view">
+        <field name="name">Inventory General Report</field>
+        <field name="model">inventory.report.general</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Inventory General Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="driver"/>
+                    </group>
+                    <group>
+                        <field name="car_num"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="source"/>
+                    </group>
+                    <group>
+                        <field name="dest"/>
+                    </group>
+                </group>
+                <group>
+                    
+                    <group>
+                        <field name="product"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_inventory_report" string="Print" type="object" class="oe_highlight"/>
+                    OR
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_inventory_general_report" model="ir.actions.act_window">
+        <field name="name">Inventory General Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">inventory.report.general</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="inventory_general_report"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_inventory_general_report"
+              id="menu_inventory_report_wizard"
+              parent="stock.menu_warehouse_report"/>
+
+</odoo>

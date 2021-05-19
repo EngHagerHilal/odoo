@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'calibri';
+    src: url('../fonts/Calibri.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/Calibri.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/Calibri.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/Calibri.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../fonts/Calibri.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/Calibri.svg#Calibri') format('svg'); /* Legacy iOS */
+}
+.footer_text
+{
+    font:normal 12px calibri !important;
+    text-align: center !important;
+    color: #000000 !important;
+    padding-top: 5px !important;
+}

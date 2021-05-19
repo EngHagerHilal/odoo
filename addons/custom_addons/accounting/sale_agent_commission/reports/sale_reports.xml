@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_agent_commission"
+                string="Sale Agent Commission Report"
+                model="sale.agent.commission"
+                report_type="qweb-pdf"
+                file="sale_agent_commission.sale_agent_commission_report"
+                name="sale_agent_commission.sale_agent_commission_report"
+        />
+    </data>
+</odoo>

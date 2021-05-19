@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="product_outstanding_report_tmpl">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <div class="row mt64 mb32">
+                                <div class="col-md-12">
+                                    <h5 class="text-center">
+                                        Outstanding Products:
+                                        <strong t-field="doc.date_from" />
+                                        -
+                                        <strong t-field="doc.date_to" />
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <t t-foreach="data_dict" t-as="partner">
+                                        <h5>
+                                            <strong
+                                                t-field="partner.display_name" />
+                                        </h5>
+                                        <t>
+                                            <table
+                                                class="table table-sm table-bordered">
+                                                <thead class="thead-dark">
+                                                    <th>Product</th>
+                                                    <th class="text-right">Ordered
+                                                        Qty
+                                                    </th>
+                                                    <th class="text-right">Delivered
+                                                        Qty
+                                                    </th>
+                                                    <th class="text-right">Outstanding
+                                                        Qty
+                                                    </th>
+                                                </thead>
+                                                <tbody>
+                                                    <t
+                                                        t-foreach="data_dict[partner]"
+                                                        t-as="sale_order">
+                                                        <tr class="thead-dark">
+                                                            <td
+                                                                colspan="4">
+                                                                <strong
+                                                                    t-field="sale_order.display_name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            t-foreach="data_dict[partner][sale_order]"
+                                                            t-as="product">
+                                                            <td>
+                                                                <span
+                                                                    t-field="product.display_name" />
+                                                                [
+                                                                <span>Date
+                                                                    Order:
+                                                                </span>
+                                                                <span
+                                                                    t-field="product.date_order" />
+                                                                ]
+                                                            </td>
+                                                            <td
+                                                                class="text-right">
+                                                                <span
+                                                                    t-esc="data_dict[partner][sale_order][product]['product_uom_qty']" />
+                                                            </td>
+                                                            <td
+                                                                class="text-right">
+                                                                <span
+                                                                    t-esc="data_dict[partner][sale_order][product]['qty_delivered']" />
+                                                            </td>
+                                                            <td
+                                                                class="text-right">
+                                                                <span
+                                                                    t-esc="data_dict[partner][sale_order][product]['product_uom_qty'] - data_dict[partner][sale_order][product]['qty_delivered']" />
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+
+                                                </tbody>
+                                            </table>
+
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

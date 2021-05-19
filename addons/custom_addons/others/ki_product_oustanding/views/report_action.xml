@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+        <report id="action_product_outstanding_report"
+                string="Product outstanding Report" 
+                model="res.partner"
+                report_type="qweb-pdf"
+                file = "ki_product_oustanding.product_outstanding_report_tmpl"
+                name ="ki_product_oustanding.product_outstanding_report_tmpl"
+                menu="False"/>
+
+    </data>
+
+</openerp>
+
+
+

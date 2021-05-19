@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_report_general">
+       <t t-call="web.html_container">
+              
+
+                <style>
+                    .table, .table td, .table th {
+                      border: 1px solid #ddd;
+                      text-align: right;
+                    }
+
+                    .table {
+                      border-collapse: collapse;
+                      width: 100%;
+                      direction: rtl ;
+                    }
+
+                    .table th, .table td {
+                      padding: 5px;
+                    }
+
+                    .salesperson{
+                        padding: 50px
+                    }
+                </style>
+             <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+               
+            </t>
+            
+            <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 50px;"/>
+                    </div>
+                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <span t-field="company.partner_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.street"/>
+                        <br/>
+                        <span t-field="company.partner_id.street2"/>
+                        <br/>
+                        <span t-field="company.partner_id.city"/>
+                        <br/>
+                        <span t-field="company.partner_id.country_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.vat"/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+                <div class="page">
+                    <div class="oe_structure"/>
+                      
+                    <center>
+                        <b>
+                            <h3>  تقارير مبيعات  </h3>
+                        </b>
+                    </center>
+                    
+                    <center>
+                        <b> من
+                            <span t-esc="start_date"/>
+                            إلى 
+                            <span t-esc="end_date"/>
+
+                        </b>
+                    </center>
+                    <br/>
+                    <t t-set="t_ordered" t-value="0" />
+                    <t t-set="t_delivered" t-value="0" />
+                    <t t-set="t_untax" t-value="0" />
+                    <t t-set="t_tax" t-value="0" />
+                    <t t-set="t_total" t-value="0" />
+                    
+                    <table class="table table-condensed" style="direction:rtl;">
+                    <thead>
+                    <th> رقم الأمر
+                    </th>
+                    <th> 
+                    التاريخ
+                    </th>
+                    <th>
+                    العميل 
+                    </th>
+                    <th>
+                    المندوب 
+                    </th>
+                    <th>
+                    المخزن 
+                    </th>
+                    <th>
+                    المنتج
+                    </th>
+                    <th>
+                    الكمية المطلوبة
+                    </th>
+                    <th>
+                    الكمية المستلمة
+                    </th>
+                   
+                    <th>
+                    اسم السائق
+                    </th>
+                    <th>
+                    رقم السيارة
+                    </th>
+                   <th>
+                   سعر الوحدة
+                   </th>
+                    <th>
+                    الإجمالي بدون ضرائب
+                    </th>
+                    <th>
+                    الضرائب
+                    </th>
+                    <th>
+                    الإجمالي
+                    </th>
+                    <th>
+                    رقم الفاتورة
+                    </th>
+                    <th>
+                    تاريخ السداد
+                    </th>
+           </thead>
+           
+           <tbody>
+           <tr t-foreach="data" t-as="order" >
+           
+<td> 
+    <span t-esc="order['name']" />
+</td>
+<td>
+<span t-esc="order['date']" />
+           </td>
+<td>
+<span t-esc="order['customer']" />
+</td>
+<td>
+<span t-esc="order['agent']" />
+</td>
+<td>
+<span t-esc="order['source']" />
+</td>
+<td>
+<span t-esc="order['product']" />
+           </td>
+<td>
+<span t-esc="order['quantity']" />
+<t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
+
+</td>
+<td>
+<span t-esc="order['received']" />
+<t t-set="t_delivered" t-value="t_delivered+order['received']" />
+
+           </td>
+<td>
+<span t-esc="order['driver']" />
+           </td>
+<td>
+<span t-esc="order['car']" />
+</td>
+<td>
+<span t-esc="order['unit_price']" />
+</td>
+<td>
+<span t-esc="order['price_sub']" />
+<t t-set="t_untax" t-value="t_untax+order['price_sub']" />
+           </td>
+<td>
+<span t-esc="order['price_tax']" />
+<t t-set="t_tax" t-value="t_tax+order['price_tax']" />
+
+</td>
+<td>
+<span t-esc="order['price_total']" />
+<t t-set="t_total" t-value="t_total+order['price_total']" />
+</td>
+<td>
+<span t-esc="order['invoice']" />
+</td>
+
+<td>
+<t t-if="order['state']=='paid'">
+<span t-esc="order['payment']" />
+</t>
+</td>
+           </tr>
+           <tr>
+            
+            <td colspan="6"> الاجمالي  </td>
+            <td> <span t-esc="t_ordered" /> </td>
+            <td> <span t-esc="t_delivered" /> </td> 
+            <td colspan="3"> </td>
+            <td><span t-esc="t_untax" /> </td>
+            <td> <span t-esc="t_tax" /> </td>
+            <td> <span t-esc="t_total" /> </td>
+            <td colspan="2"> </td>            
+           </tr>
+           </tbody>
+                    </table>             
+                </div>
+                <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
+               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
+
+            </t>
+
+    </template>
+</odoo>

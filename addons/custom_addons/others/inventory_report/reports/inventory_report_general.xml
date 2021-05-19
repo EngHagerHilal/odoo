@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inventory_report_general">
+       <t t-call="web.html_container">
+              
+
+                <style>
+                    .table, .table td, .table th {
+                      border: 1px solid #ddd;
+                      text-align: right;
+                    }
+
+                    .table {
+                      border-collapse: collapse;
+                      width: 100%;
+                      direction: rtl ;
+                    }
+
+                    .table th, .table td {
+                      padding: 5px;
+                    }
+
+                    .salesperson{
+                        padding: 50px
+                    }
+                </style>
+             <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+               
+            </t>
+            
+            <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 50px;"/>
+                    </div>
+                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <span t-field="company.partner_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.street"/>
+                        <br/>
+                        <span t-field="company.partner_id.street2"/>
+                        <br/>
+                        <span t-field="company.partner_id.city"/>
+                        <br/>
+                        <span t-field="company.partner_id.country_id"/>
+                        <br/>
+                        <span t-field="company.partner_id.vat"/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+                <div class="page">
+                    <div class="oe_structure"/>
+                      
+                    <center>
+                        <b>
+                            <h3>  تقارير حركات مخزنية  </h3>
+                        </b>
+                    </center>
+                    
+                    <center>
+                        <b> من
+                            <span t-esc="start_date"/>
+                            إلى 
+                            <span t-esc="end_date"/>
+                        </b>
+                    </center>
+                    <br/>
+                    <t t-set="quantity" t-value="0" />
+                    <table class="table table-condensed" style="direction:rtl;">
+                    <thead>
+                    <th> التاريخ 
+                    </th>
+                    <th> 
+                    المنتج
+                    </th>
+                    <th>
+                    الكمية 
+                    </th>
+                    <th>
+                    اسم السائق
+                    </th>
+                    <th>
+                    رقم السيارة
+                    </th>
+                    <th>
+                     رقم الأمر 
+                    </th>
+                    <th>
+                    المخزن المُحول منه
+                    </th>
+                    <th>
+                    المخزن المُحول إليه 
+                    </th>
+                    
+           </thead>
+           
+           <tbody>
+           <tr t-foreach="data" t-as="order" >
+           <td> 
+           <span t-esc="order['date']" />
+           </td>
+<td>
+<span t-esc="order['product']" />
+           </td>
+<td>
+<span t-esc="order['quantity']" />
+<t t-set="quantity" t-value="quantity+order['quantity']" />
+</td>
+<td>
+<span t-esc="order['driver']" />
+           </td>
+<td>
+<span t-esc="order['car']" />
+           </td>
+<td>
+<span t-esc="order['picking']" />
+           </td>
+<td>
+<span t-esc="order['source']" />
+           </td>
+<td>
+<span t-esc="order['dest']" />
+           </td>
+           </tr>
+           
+           <tr>
+           <td colspan="2">
+           الإجمالي
+           </td>
+           <td>
+           <span t-esc="quantity" />
+           </td>
+
+          <td colspan="5"> 
+           
+           </td>
+           </tr>
+
+
+           </tbody>
+
+                    </table>
+                     
+                </div>
+                <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
+               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
+
+            </t>
+
+    </template>
+</odoo>

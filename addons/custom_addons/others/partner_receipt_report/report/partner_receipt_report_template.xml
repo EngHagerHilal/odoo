@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <template id="partner_receipt_pdf">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-left">
+                    <h3 class="text-center"> سند صرف  </h3>
+                    <!--<span t-esc="data['product_id']"/>-->
+                    <!--<t t-foreach="request.env['res.partner'].search([('id', '=', data['partner_id'])])" t-as="prd">
+                        <h4><span t-field="prd.name"/></h4>
+                    </t>-->
+                    <span t-esc="date" />
+                    <span t-esc="partner.name" />
+                    <span t-esc="from" />
+                    <span t-esc="to" />
+                    <span t-esc="amount" />
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</data>
+</odoo>
