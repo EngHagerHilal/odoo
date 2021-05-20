@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+		<!-- Add custom js for pos_bag_charges -->	    
+        <template id="assets_for_pos_bag_charges" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/pos_bag_charges/static/src/js/pos_bag_charges.js"/>
+            </xpath>
+        </template>
+        
+        
+        	<!-- Add Many2one Bag Category Field in POS Config -->
+			<record id="inherit_view_pos_bag_charges_form" model="ir.ui.view">
+				<field name="name">inherit_pos_bag_charges_form</field>
+				<field name="model">pos.config</field>
+				<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+				<field name="arch" type="xml">
+						<xpath expr="//div[@id='category_reference']" position="after">
+                            
+		                    <div class="col-xs-12 col-md-6 o_setting_box">
+		                        <div class="o_setting_right_pane">
+		                            <span>Allow Bag Charges</span>
+		                            <!--div class="text-muted">
+		                                Allow Bag Charges
+		                            </div-->
+		                            <div>
+		                                <field name="allow_bag_charges"/>
+		                            </div>
+		                        </div>
+		                        <div class="o_setting_right_pane" attrs="{'invisible': [('allow_bag_charges', '=', False)]}">
+		                            <span>Allow Bag Charges</span>
+		                            <!--div class="text-muted">
+		                                POS Bag category
+		                            </div-->
+		                            <div>
+		                                <field name="pos_bag_category_id"/>
+		                            </div>
+		                        </div>
+		                    </div>
+                        
+					</xpath>
+				</field>
+			</record>
+			
+        
+    </data>
+</odoo>

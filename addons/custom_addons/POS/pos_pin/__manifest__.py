@@ -10,11 +10,9 @@
     "license": "Other OSI approved licence",  # MIT
     "category": "Hidden",
     "images": ["images/pos_pin.jpg"],
-    "support": "pos@it-projects.info",
-    "website": "https://it-projects.info",
+    "support": "apps@itpp.dev",
+    "website": "https://itpp.dev",
     "depends": ["point_of_sale"],
     "data": ["data.xml"],
-    "price": 20.00,
-    "currency": "EUR",
     "installable": True,
 }
