@@ -55,6 +55,12 @@ class SaleReportGeneral(models.TransientModel):
                 invoice = 'غير مفوتر'
                 state = 'غير مفوتر'
                 paid = 'غير مفوتر'
+            if len(order.picking_ids) > 0 :
+                stock = []
+                for inv in order.picking_ids :
+                    stock.append(inv.name)
+            else :
+                stock = "غير مسلَّم"
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
@@ -74,6 +80,7 @@ class SaleReportGeneral(models.TransientModel):
                         'agent' : order.x_sale_agent.name ,
                         'balance' : order.x_balance ,
                         'invoice' : invoice ,
+                        'stock' : stock ,
                         'state' : state ,
                          'unit' :  move.product_uom ,
                         'payment' : paid ,
