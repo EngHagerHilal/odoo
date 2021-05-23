@@ -75,7 +75,7 @@ class SaleReportGeneral(models.TransientModel):
                         'balance' : order.x_balance ,
                         'invoice' : invoice ,
                         'state' : state ,
-                         'unit' :  move.product_uom 
+                         'unit' :  move.product_uom ,
                         'payment' : paid ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
