@@ -1,7 +1,7 @@
 from odoo import models, fields, api, _
 
 
-class SaleReportVendor(models.TransientModel):
+class SaleReportGeneral(models.TransientModel):
     _name = 'sale.report.general'
 
     start_date = fields.Datetime(string="Start Date", required=True)
@@ -84,7 +84,7 @@ class SaleReportVendor(models.TransientModel):
         
         datas = {
             'ids': self,
-            'model': 'inventory.report.general',
+            'model': 'sale.report.general',
             'form': orders,
             'start_date': self.start_date,
             'end_date': self.end_date ,
