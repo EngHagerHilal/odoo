@@ -82,7 +82,7 @@ class SaleReportGeneral(models.TransientModel):
                         'invoice' : invoice ,
                         'stock' : stock ,
                         'state' : state ,
-                         'unit' :  move.product_uom ,
+                         'unit' :  move.product_uom.name ,
                         'payment' : paid ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,

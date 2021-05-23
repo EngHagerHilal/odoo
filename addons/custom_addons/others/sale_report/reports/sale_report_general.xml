@@ -170,9 +170,9 @@
 <td>
 <span t-esc="order['car']" />
 </td>
+<td>
 <span t-esc="order['product']" />
            </td>
-<td>
 <td>
 <span t-esc="order['unit']" />
 </td>

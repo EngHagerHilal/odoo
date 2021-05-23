@@ -71,7 +71,7 @@ class PurchaseReportVendor(models.TransientModel):
                         'price_tax' : move.price_tax ,
                         'price_total' : move.price_total ,
                         'driver' : driver,
-                         'unit' : move.product_uom ,
+                         'unit' : move.product_uom.name ,
                         'car' : order.x_car_number,
                         'source' : order.partner_id.name,
                         'dest' : order.picking_type_id.warehouse_id.name ,
