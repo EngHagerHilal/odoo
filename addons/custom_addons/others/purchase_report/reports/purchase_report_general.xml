@@ -98,7 +98,19 @@
                     المخزن
                     </th>
                     <th>
+                    اسم السائق
+                    </th>
+                    <th>
+                    رقم السيارة
+                    </th>
+                    <th>
                     المنتج
+                    </th>
+                    <th>
+                     الوحدة
+                    </th>
+                    <th>
+                    سعر الوحدة
                     </th>
                     <th>
                     الكمية المطلوبة
@@ -106,15 +118,8 @@
                     <th>
                     الكمية المستلمة
                     </th>
-                    <th>
-                    اسم السائق
-                    </th>
-                    <th>
-                    رقم السيارة
-                    </th>
-                    <th>
-                    سعر الوحدة
-                    </th>
+                   
+                    
                     <th>
                     الإجمالي بدون ضرائب
                     </th>
@@ -149,9 +154,22 @@
 <span t-esc="order['dest']" />
 </td>
 <td>
+<span t-esc="order['driver']" />
+           </td>
+<td>
+<span t-esc="order['car']" />
+</td>
+<td>
 <span t-esc="order['product']" />
            </td>
 <td>
+
+<td>
+<span t-esc="order['unit']" />
+</td>
+<td>
+<span t-esc="order['unit_price']" />
+</td>
 <span t-esc="order['quantity']" />
 <t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
 
@@ -160,15 +178,7 @@
 <span t-esc="order['received']" />
 <t t-set="t_delivered" t-value="t_delivered+order['received']" />
            </td>
-<td>
-<span t-esc="order['driver']" />
-           </td>
-<td>
-<span t-esc="order['car']" />
-</td>
-<td>
-<span t-esc="order['unit_price']" />
-</td>
+
 <td>
 <span t-esc="order['price_sub']" />
 <t t-set="t_untax" t-value="t_untax+order['price_sub']" />
@@ -186,10 +196,9 @@
            
            <tr>
             
-            <td colspan="7"> الاجمالي  </td>
+            <td colspan="11" style="direction:rtl;"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
-            <td colspan="3"> </td>
             <td><span t-esc="t_untax" /> </td>
             <td> <span t-esc="t_tax" /> </td>
             <td> <span t-esc="t_total" /> </td>

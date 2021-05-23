@@ -81,6 +81,12 @@
                     <thead>
                     <th> رقم الأمر
                     </th>
+                    <th>
+                    رقم الفاتورة
+                    </th>
+                    <th>
+                    رقم سند التسليم
+                    </th>
                     <th> 
                     التاريخ
                     </th>
@@ -94,8 +100,22 @@
                     المخزن 
                     </th>
                     <th>
+                    اسم السائق
+                    </th>
+                    <th>
+                    رقم السيارة
+                    </th>
+                    <th>
                     المنتج
                     </th>
+                   
+                   <th>
+                    الوحدة
+                   </th> 
+                   <th>
+                   سعر الوحدة
+                   </th>
+
                     <th>
                     الكمية المطلوبة
                     </th>
@@ -103,15 +123,7 @@
                     الكمية المستلمة
                     </th>
                    
-                    <th>
-                    اسم السائق
-                    </th>
-                    <th>
-                    رقم السيارة
-                    </th>
-                   <th>
-                   سعر الوحدة
-                   </th>
+                    
                     <th>
                     الإجمالي بدون ضرائب
                     </th>
@@ -121,9 +133,7 @@
                     <th>
                     الإجمالي
                     </th>
-                    <th>
-                    رقم الفاتورة
-                    </th>
+                    
                     <th>
                     تاريخ السداد
                     </th>
@@ -134,6 +144,12 @@
            
 <td> 
     <span t-esc="order['name']" />
+</td>
+<td>
+<span t-esc="order['invoice']" />
+</td>
+<td>
+<span t-esc="order['stock']" />
 </td>
 <td>
 <span t-esc="order['date']" />
@@ -148,9 +164,21 @@
 <span t-esc="order['source']" />
 </td>
 <td>
+<td>
+<span t-esc="order['driver']" />
+           </td>
+<td>
+<span t-esc="order['car']" />
+</td>
 <span t-esc="order['product']" />
            </td>
 <td>
+<td>
+<span t-esc="order['unit']" />
+</td>
+<td>
+<span t-esc="order['unit_price']" />
+</td>
 <span t-esc="order['quantity']" />
 <t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
 
@@ -160,15 +188,8 @@
 <t t-set="t_delivered" t-value="t_delivered+order['received']" />
 
            </td>
-<td>
-<span t-esc="order['driver']" />
-           </td>
-<td>
-<span t-esc="order['car']" />
-</td>
-<td>
-<span t-esc="order['unit_price']" />
-</td>
+
+
 <td>
 <span t-esc="order['price_sub']" />
 <t t-set="t_untax" t-value="t_untax+order['price_sub']" />
@@ -182,9 +203,6 @@
 <span t-esc="order['price_total']" />
 <t t-set="t_total" t-value="t_total+order['price_total']" />
 </td>
-<td>
-<span t-esc="order['invoice']" />
-</td>
 
 <td>
 <t t-if="order['state']=='paid'">
@@ -194,14 +212,13 @@
            </tr>
            <tr>
             
-            <td colspan="6"> الاجمالي  </td>
+            <td colspan="12"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
-            <td colspan="3"> </td>
             <td><span t-esc="t_untax" /> </td>
             <td> <span t-esc="t_tax" /> </td>
             <td> <span t-esc="t_total" /> </td>
-            <td colspan="2"> </td>            
+            <td colspan="1"> </td>            
            </tr>
            </tbody>
                     </table>             
