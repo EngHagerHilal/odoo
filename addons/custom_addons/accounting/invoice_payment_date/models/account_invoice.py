@@ -15,10 +15,13 @@ class AccountInvoice(models.Model):
     @api.depends('state' , 'type')
     def compute_payment_date(self):
         for record in self : 
-            if (record.state == 'paid' and record.type == 'out_invoice'):                
-                payment = record.move_id.reverse_entry_id.line_ids[0].date
-                for move in record.move_id.reverse_entry_id.line_ids :
-                    if  move.date > payment :
-                        payment = move.date
-                record.payment_date = payment
+            if (record.state == 'paid' and record.type == 'out_invoice'):  
+                if record.move_id :
+                    if record.move_id.reverse_entry_id :
+                        if len(record.move_id.reverse_entry_id.line_ids) > 0 :
+                            payment = record.move_id.reverse_entry_id.line_ids[0].date
+                            for move in record.move_id.reverse_entry_id.line_ids :
+                                if  move.date > payment :
+                                    payment = move.date
+                            record.payment_date = payment
         
