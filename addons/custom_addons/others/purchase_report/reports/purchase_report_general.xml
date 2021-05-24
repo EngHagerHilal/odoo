@@ -133,8 +133,7 @@
            </thead>
            
            <tbody>
-           <tr t-foreach="data" t-as="order" >
-           
+           <tr t-foreach="data" t-as="order" >           
 <td> 
     <span t-esc="order['name']" />
 </td>
