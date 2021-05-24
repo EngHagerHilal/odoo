@@ -15,7 +15,7 @@ class AccountInvoice(models.Model):
     @api.depends('state' , 'type')
     def compute_payment_date(self):
         for record in self : 
-            if (record.state == 'paid' and record.type == 'out_invoice'):  
+            if (record.state == 'paid'):  
                 if record.payment_ids :
                         payment = record.payment_ids[0].payment_date
                         for move in record.payment_ids :
