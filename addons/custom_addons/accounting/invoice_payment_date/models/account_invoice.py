@@ -12,7 +12,7 @@ class AccountInvoice(models.Model):
     payment_date = fields.Date(string="payment date" , readOnly = True , store = True , compute="compute_payment_date")
         
 
-    @api.depends('state' , 'type')
+    @api.depends('state')
     def compute_payment_date(self):
         for record in self : 
             if (record.state == 'paid'):  
