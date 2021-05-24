@@ -16,8 +16,8 @@ class AccountInvoice(models.Model):
     def compute_payment_date(self):
         for record in self : 
             if (record.state == 'paid' and record.type == 'out_invoice'):                
-                payment = record.reverse_entry_id.move_id[0].date
-                for move in record.reverse_entry_id.move_id :
+                payment = record.move_id.reverse_entry_id.move_id[0].date
+                for move in record.move_id.reverse_entry_id.move_id :
                     if  move.date > payment :
                         payment = move.date
                 record.payment_date = payment
