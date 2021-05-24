@@ -13,7 +13,7 @@ class AccountInvoice(models.Model):
     commission = fields.Float( string="Commissions", compute="compute_commission" , store=True, default=0)
     sale_agent = fields.Many2one(comodel_name='hr.employee', related='sale_id.x_sale_agent', readonly=False, states={'paid': [('readonly', True)]} , domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , store = True , compute="compute_deadline")
-    payment_date = fields.Date(string="payment date" , readOnly = True , store = True , compute="compute_payment_date")
+    #payment_date = fields.Date(string="payment date" , readOnly = True , store = True , compute="compute_payment_date")
     
     
 
@@ -34,15 +34,15 @@ class AccountInvoice(models.Model):
                 invoice.deadline = x2
         #return self.deadline
     
-    @api.depends('state' , 'type')
-    def compute_payment_date(self):
-        for record in self : 
-            if (record.state == 'paid' and record.type == 'out_invoice'):
-                payment = record.move_id[0].date
-                for move in record.move_id :
-                    if  move.date > payment :
-                        payment = move.date
-                record.payment_date = payment
+    #@api.depends('state' , 'type')
+    #def compute_payment_date(self):
+     #   for record in self : 
+      #      if (record.state == 'paid' and record.type == 'out_invoice'):
+       #         payment = record.move_id[0].date
+        #        for move in record.move_id :
+         #           if  move.date > payment :
+          #              payment = move.date
+           #     record.payment_date = payment
         
     @api.depends('state' , 'type')
     def compute_commission(self) :
