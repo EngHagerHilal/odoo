@@ -16,12 +16,10 @@ class AccountInvoice(models.Model):
     def compute_payment_date(self):
         for record in self : 
             if (record.state == 'paid' and record.type == 'out_invoice'):  
-                if record.move_id :
-                    if record.move_id.reverse_entry_id :
-                        if len(record.move_id.reverse_entry_id.line_ids) > 0 :
-                            payment = record.move_id.reverse_entry_id.line_ids[0].date
-                            for move in record.move_id.reverse_entry_id.line_ids :
-                                if  move.date > payment :
-                                    payment = move.date
-                            record.payment_date = payment
+                if record.payment_ids :
+                        payment = record.payment_ids[0].payment_date
+                        for move in record.payment_ids :
+                                if  move.payment_date > payment :
+                                    payment = move.payment_date
+                        record.payment_date = payment
         
