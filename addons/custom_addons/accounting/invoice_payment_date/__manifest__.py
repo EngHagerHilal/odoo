@@ -8,7 +8,7 @@
     'author': 'Leen',
     'website': 'http://www.leen-eg.com',
     'maintainer': 'Leen.',
-    'summary': 'Compute commision for sale agents',
+    'summary': 'Compute Invoice totally paid date',
     'depends': [
         'account',
     ],
