@@ -184,7 +184,8 @@
 </td>
            </tr>
           <tr>
-     <td colspan="6"> الاجمالي  </td>
+     <td colspan="5"> الاجمالي  </td>
+     <td >  <span t-esc="quantity" /> </td>
      <td colspan="1">   </td>
      <td >  <span t-esc="untax" /> </td>
      <td >  <span t-esc="tax" /> </td>

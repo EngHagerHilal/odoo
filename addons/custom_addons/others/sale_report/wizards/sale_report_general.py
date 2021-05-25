@@ -47,6 +47,7 @@ class SaleReportGeneral(models.TransientModel):
                     driver = order.x_paid_driver
                 else :
                     driver = ""
+                    
             if len(order.invoice_ids) > 0 :
                 invoice = order.invoice_ids[0].number
                 state = order.invoice_ids[0].state
