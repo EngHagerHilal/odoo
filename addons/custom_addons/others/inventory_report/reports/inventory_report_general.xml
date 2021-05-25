@@ -82,6 +82,9 @@
                     الكمية 
                     </th>
                     <th>
+                    الوحدة 
+                    </th>
+                    <th>
                     اسم السائق
                     </th>
                     <th>
@@ -110,6 +113,9 @@
 <td>
 <span t-esc="order['quantity']" />
 <t t-set="quantity" t-value="quantity+order['quantity']" />
+</td>
+<td>
+<span t-esc="order['unit']" />
 </td>
 <td>
 <span t-esc="order['driver']" />

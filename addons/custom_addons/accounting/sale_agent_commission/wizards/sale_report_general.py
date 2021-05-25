@@ -30,6 +30,8 @@ class SaleAgentCommission(models.TransientModel):
                         'date' : invoice.date_invoice,
                         'payment' : invoice.payment_date,
                         'commission' : invoice.commission ,
+                        'price_commission' : invoice_price_payment ,
+                        'payment_commission' : invoice_payment_payment , 
                         'product' : invoice.invoice_line_ids[0].product_id.name ,
                         'unit_price' : invoice.invoice_line_ids[0].price_unit ,
                         'quantity' : invoice.invoice_line_ids[0].quantity ,

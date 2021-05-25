@@ -76,7 +76,17 @@
                     </center>
                     <br/>
                     <t t-if="em_agent==1">
+                    <t t-set="total_price" t-value="0" />
+                    <t t-set="untax" t-value="0" />
+                    <t t-set="tax" t-value="0" />
+                    
                     <t t-set="total" t-value="0" />
+                    <t t-set="payment" t-value="0" />
+                    <t t-set="price" t-value="0" />
+                    <t t-set="quantity" t-value="0" />
+
+
+
                     <table class="table table-condensed" style="direction:rtl;">
                     <thead>
                     <th> رقم الفاتورة 
@@ -109,7 +119,13 @@
                     الاجمالي شامل الضريبة 
                     </th>
                     <th>
-                    العمولة 
+                    عمولة السداد 
+                    </th>
+                    <th>
+                    عمولة فرق السعر 
+                    </th>
+                    <th>
+                    إجمالي العمولة 
                     </th>
                     
            </thead>
@@ -137,29 +153,44 @@
 </td>
 <td>
 <span t-esc="order['quantity']" />
+<t t-set="quantity" t-value="quantity+order['quantity']" />
 </td>
 <td>
 <span t-esc="order['unit_price']" />
 </td>
-
-
-
 <td>
 <span t-esc="order['untaxed']" />
-           </td>
+<t t-set="untax" t-value="untax+order['untaxed']" />
+</td>
 <td>
 <span t-esc="order['taxed']" />
+<t t-set="tax" t-value="tax+order['taxed']" />
            </td>
 <td>
 <span t-esc="order['total']" />
-           </td>
-           <td>
+<t t-set="total_price" t-value="total_price+order['total']" />
+</td>
+<td>
+<span t-esc="order['payment_commission']" />
+<t t-set="payment" t-value="payment+order['payment_commission']" />
+</td>
+<td>
+<span t-esc="order['price_commission']" />
+<t t-set="price" t-value="price+order['price_commission']" />
+</td>
+<td>
 <span t-esc="order['commission']" />
- <t t-set="total" t-value="total+order['commission']" />
+<t t-set="total" t-value="total+order['commission']" />
 </td>
            </tr>
           <tr>
-     <td colspan="10"> الاجمالي  </td>
+     <td colspan="5"> الاجمالي  </td>
+     <td colspan="1">   </td>
+     <td >  <span t-esc="untax" /> </td>
+     <td >  <span t-esc="tax" /> </td>
+     <td >  <span t-esc="total_price" /> </td>
+     <td >  <span t-esc="payment" /> </td>
+     <td >  <span t-esc="price" /> </td>
      <td >  <span t-esc="total" /> </td>
      </tr> 
            </tbody>
@@ -168,6 +199,7 @@
 
                     <t t-if="em_driver==1" >
                     <t t-set="total" t-value="0" />
+                    <t t-set="quantity" t-value="0" />
                     <table class="table table-condensed" style="direction:rtl;">
                     <thead>
                     <th> رقم الأمر 
@@ -214,6 +246,7 @@
 </td>
 <td>
 <span t-esc="order['quantity']" />
+<t t-set="quantity" t-value="quantity+order['quantity']" />
 </td>
 <td>
 <span t-esc="order['commission']" />
@@ -221,8 +254,10 @@
 </td>
            </tr>
      <tr>
-     <td colspan="6"> الاجمالي  </td>
+     <td colspan="5"> الاجمالي  </td>
+     <td >  <span t-esc="quantity" /> </td>
      <td >  <span t-esc="total" /> </td>
+     
      </tr>     
            </tbody>
                     </table> 

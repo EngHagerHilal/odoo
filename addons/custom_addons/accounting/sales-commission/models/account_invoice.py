@@ -11,8 +11,12 @@ class AccountInvoice(models.Model):
 
 
     commission = fields.Float( string="Commissions", compute="compute_commission" , store=True, default=0)
+    payment_commission = fields.Float( string="Payment Commissions", compute="compute_commission" , store=True, default=0)
+    price_commission = fields.Float( string="Price Commissions", compute="compute_commission" , store=True, default=0)
+     
     sale_agent = fields.Many2one(comodel_name='hr.employee', related='sale_id.x_sale_agent', readonly=False, states={'paid': [('readonly', True)]} , domain=[('job_id.name', '=', 'مندوب مبيعات')],delegate=True)
     deadline = fields.Datetime(string="Deadline" , readOnly = True , store = True , compute="compute_deadline")
+    
     #payment_date = fields.Date(string="payment date" , readOnly = True , store = True , compute="compute_payment_date")
     
     
@@ -43,7 +47,7 @@ class AccountInvoice(models.Model):
          #           if  move.date > payment :
           #              payment = move.date
            #     record.payment_date = payment
-        
+    @api.multi   
     @api.depends('state' , 'type')
     def compute_commission(self) :
         for record in self :
@@ -60,6 +64,8 @@ class AccountInvoice(models.Model):
                                 if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0  :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product_id.compute_public_price()
                                 record.commission = count * line.product_id.categ_id.super_commission_rate + diff / 2
+                                record.payment_commission = count * line.product_id.categ_id.super_commission_rate
+                                record.price_commission = diff / 2
                             #self.sale_agent.commissions += self.commission 
                     else :
                         if record.invoice_line_ids :
@@ -69,10 +75,14 @@ class AccountInvoice(models.Model):
                                     count = count + line.quantity
                                 if line.product_id.compute_public_price() < line.price_unit and line.product_id.compute_public_price() != 0 :
                                     diff = line.quantity * line.price_unit - line.quantity * line.product.compute_public_price() 
-                                record.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2 
+                                record.commission = count * line.product_id.categ_id.default_commission_rate + diff / 2
+                                record.payment_commission = count * line.product_id.categ_id.default_commission_rate
+                                record.price_commission = diff / 2 
                             #self.sale_agent.commissions += self.commission  
             else :
                 record.commission = 0
+                record.payment_commission = 0
+                record.price_commission = 0 
 
     #@api.depends('x_sales')
     #def get_sale_agent(self) :
