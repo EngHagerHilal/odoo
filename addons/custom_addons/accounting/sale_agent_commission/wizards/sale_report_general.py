@@ -54,7 +54,7 @@ class SaleAgentCommission(models.TransientModel):
                             'commission' : invoice.commission ,
                             'location' : invoice.location_id.name ,
                             'product' : invoice.move_lines[0].product_id.name ,
-                            'quantity' : invoice.move_lines[0].quantity_done ,
+                            'quantity' : invoice.move_lines[0].product_qty ,
                     })
         
         datas = {

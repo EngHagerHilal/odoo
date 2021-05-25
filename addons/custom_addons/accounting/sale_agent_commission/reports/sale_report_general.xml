@@ -251,7 +251,8 @@
 </td>
 
 <td>
- بلح 
+ <span t-esc="order['commission']" />
+<t t-set="total" t-value="total+order['commission']" />
  </td>
            </tr>
      <tr>
