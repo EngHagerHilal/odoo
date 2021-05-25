@@ -249,10 +249,10 @@
 <span t-esc="order['quantity']" />
 <t t-set="quantity" t-value="quantity+order['quantity']" />
 </td>
+
 <td>
-<span t-esc="order['commission']" />
- <t t-set="total" t-value="total+order['commission']" />
-</td>
+ بلح 
+ </td>
            </tr>
      <tr>
      <td colspan="5"> الاجمالي  </td>
