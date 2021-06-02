@@ -52,6 +52,7 @@ class InventoryReportVendor(models.TransientModel):
                         'product' : move.product_id.name,
                         'quantity' : move.product_qty	,
                         'driver' : order.x_driver.name,
+                        'unit' : move.product_uom.name ,
                         'car' : order.x_car_number,
                         'picking' : order.name ,
                         'source' : order.location_id.complete_name,

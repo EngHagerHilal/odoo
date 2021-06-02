@@ -7,7 +7,7 @@
                 <style>
                     .table, .table td, .table th {
                       border: 1px solid #ddd;
-                      text-align: left;
+                      text-align: right;
                     }
 
                     .table {
@@ -17,7 +17,7 @@
                     }
 
                     .table th, .table td {
-                      padding: 10px;
+                      padding: 5px;
                     }
 
                     .salesperson{
@@ -70,6 +70,7 @@
                         </b>
                     </center>
                     <br/>
+                    <t t-set="quantity" t-value="0" />
                     <table class="table table-condensed" style="direction:rtl;">
                     <thead>
                     <th> التاريخ 
@@ -79,6 +80,9 @@
                     </th>
                     <th>
                     الكمية 
+                    </th>
+                    <th>
+                    الوحدة 
                     </th>
                     <th>
                     اسم السائق
@@ -108,7 +112,11 @@
            </td>
 <td>
 <span t-esc="order['quantity']" />
-           </td>
+<t t-set="quantity" t-value="quantity+order['quantity']" />
+</td>
+<td>
+<span t-esc="order['unit']" />
+</td>
 <td>
 <span t-esc="order['driver']" />
            </td>
@@ -125,12 +133,30 @@
 <span t-esc="order['dest']" />
            </td>
            </tr>
+           
+           <tr>
+           <td colspan="2">
+           الإجمالي
+           </td>
+           <td>
+           <span t-esc="quantity" />
+           </td>
+
+          <td colspan="5"> 
+           
+           </td>
+           </tr>
+
 
            </tbody>
 
                     </table>
                      
                 </div>
+                <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
+               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
+
             </t>
 
     </template>

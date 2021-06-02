@@ -1,7 +1,7 @@
 from odoo import models, fields, api, _
 
 
-class SaleReportVendor(models.TransientModel):
+class SaleReportGeneral(models.TransientModel):
     _name = 'sale.report.general'
 
     start_date = fields.Datetime(string="Start Date", required=True)
@@ -45,6 +45,23 @@ class SaleReportVendor(models.TransientModel):
             else:
                 if order.x_paid_driver : 
                     driver = order.x_paid_driver
+                else :
+                    driver = ""
+                    
+            if len(order.invoice_ids) > 0 :
+                invoice = order.invoice_ids[0].number
+                state = order.invoice_ids[0].state
+                paid = order.invoice_ids[0].payment_date 
+            else :
+                invoice = 'غير مفوتر'
+                state = 'غير مفوتر'
+                paid = 'غير مفوتر'
+            if len(order.picking_ids) > 0 :
+                stock = []
+                for inv in order.picking_ids :
+                    stock.append(inv.name)
+            else :
+                stock = "غير مسلَّم"
             for move in order.order_line :
                 if ( move.product_id == self.product or not self.product) :
                     orders.append ({
@@ -53,6 +70,7 @@ class SaleReportVendor(models.TransientModel):
                         'product' : move.product_id.name,
                         'quantity' : move.product_uom_qty	,
                         'received' : move.qty_delivered ,
+                        'unit_price' : move.price_unit ,
                         'price_sub' : move.price_subtotal ,
                         'price_tax' : move.price_tax ,
                         'price_total' : move.price_total ,
@@ -62,6 +80,11 @@ class SaleReportVendor(models.TransientModel):
                         'customer' : order.partner_id.name ,
                         'agent' : order.x_sale_agent.name ,
                         'balance' : order.x_balance ,
+                        'invoice' : invoice ,
+                        'stock' : stock ,
+                        'state' : state ,
+                         'unit' :  move.product_uom.name ,
+                        'payment' : paid ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax
@@ -69,7 +92,7 @@ class SaleReportVendor(models.TransientModel):
         
         datas = {
             'ids': self,
-            'model': 'inventory.report.general',
+            'model': 'sale.report.general',
             'form': orders,
             'start_date': self.start_date,
             'end_date': self.end_date ,

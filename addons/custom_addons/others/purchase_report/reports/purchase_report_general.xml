@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="purchase_report_general">
+        <link rel='stylesheet' href="../static/fonts/font.css"/>
+
        <t t-call="web.html_container">
               
 
@@ -17,7 +19,7 @@
                     }
 
                     .table th, .table td {
-                      padding: 10px;
+                      padding: 5px;
                     }
 
                     .salesperson{
@@ -58,7 +60,7 @@
                       
                     <center>
                         <b>
-                            <h3>  تقارير مشتريات  </h3>
+                            <h3 class="footer_text">  تقارير مشتريات  </h3>
                         </b>
                     </center>
                     
@@ -71,9 +73,20 @@
                         </b>
                     </center>
                     <br/>
-                    <table class="table table-condensed" style="direction:rtl;">
+                    <t t-set="t_ordered" t-value="0" />
+                    <t t-set="t_delivered" t-value="0" />
+                    <t t-set="t_untax" t-value="0" />
+                    <t t-set="t_tax" t-value="0" />
+                    <t t-set="t_total" t-value="0" />
+                    <table class="table table-condensed footer_text" style="direction:rtl;">
                     <thead>
                     <th> رقم الأمر
+                    </th>
+                    <th>
+                    رقم الفاتورة
+                    </th>
+                    <th>
+                    رقم سند الاستلام
                     </th>
                     <th> 
                     التاريخ
@@ -85,7 +98,19 @@
                     المخزن
                     </th>
                     <th>
+                    اسم السائق
+                    </th>
+                    <th>
+                    رقم السيارة
+                    </th>
+                    <th>
                     المنتج
+                    </th>
+                    <th>
+                     الوحدة
+                    </th>
+                    <th>
+                    سعر الوحدة
                     </th>
                     <th>
                     الكمية المطلوبة
@@ -93,12 +118,8 @@
                     <th>
                     الكمية المستلمة
                     </th>
-                    <th>
-                    اسم السائق
-                    </th>
-                    <th>
-                    رقم السيارة
-                    </th>
+                   
+                    
                     <th>
                     الإجمالي بدون ضرائب
                     </th>
@@ -112,12 +133,16 @@
            </thead>
            
            <tbody>
-           <tr t-foreach="data" t-as="order" >
-           
+           <tr t-foreach="data" t-as="order" >           
 <td> 
     <span t-esc="order['name']" />
 </td>
-                  
+<td>
+<span t-esc="order['invoice']" />
+</td>
+<td>
+<span t-esc="order['stock']" />
+</td>                  
 <td>
 <span t-esc="order['date']" />
            </td>
@@ -128,33 +153,66 @@
 <span t-esc="order['dest']" />
 </td>
 <td>
-<span t-esc="order['product']" />
-           </td>
-<td>
-<span t-esc="order['quantity']" />
-           </td>
-<td>
-<span t-esc="order['received']" />
-           </td>
-<td>
 <span t-esc="order['driver']" />
            </td>
 <td>
 <span t-esc="order['car']" />
 </td>
 <td>
+<span t-esc="order['product']" />
+           </td>
+
+<td>
+<span t-esc="order['unit']" />
+</td>
+<td>
+<span t-esc="order['unit_price']" />
+</td>
+<td>
+<span t-esc="order['quantity']" />
+<t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
+</td>
+<td>
+<span t-esc="order['received']" />
+<t t-set="t_delivered" t-value="t_delivered+order['received']" />
+           </td>
+
+<td>
 <span t-esc="order['price_sub']" />
+<t t-set="t_untax" t-value="t_untax+order['price_sub']" />
            </td>
 <td>
 <span t-esc="order['price_tax']" />
+<t t-set="t_tax" t-value="t_tax+order['price_tax']" />
            </td>
 <td>
 <span t-esc="order['price_total']" />
+<t t-set="t_total" t-value="t_total+order['price_total']" />
 </td>
+
            </tr>
+           
+           <tr>
+            
+            <td colspan="11" style="direction:rtl;"> الاجمالي  </td>
+            <td> <span t-esc="t_ordered" /> </td>
+            <td> <span t-esc="t_delivered" /> </td> 
+            <td><span t-esc="t_untax" /> </td>
+            <td> <span t-esc="t_tax" /> </td>
+            <td> <span t-esc="t_total" /> </td>
+                     
+
+           </tr>
+
            </tbody>
-                    </table>               
+                    </table>     
+               <t t-set="user" t-value="user"/>
+               <span t-esc="user.name" /> 
+               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>   
+
+
                 </div>
+
             </t>
 
     </template>
