@@ -95,6 +95,9 @@
                     المورد 
                     </th>
                     <th>
+                        رقم إشارة المورد 
+                        </th>
+                    <th>
                     المخزن
                     </th>
                     <th>
@@ -150,6 +153,9 @@
 <span t-esc="order['source']" />
 </td>
 <td>
+<span t-esc="order['partner_ref']" />
+</td>
+<td>
 <span t-esc="order['dest']" />
 </td>
 <td>
@@ -194,7 +200,7 @@
            
            <tr>
             
-            <td colspan="11" style="direction:rtl;"> الاجمالي  </td>
+            <td colspan="12" style="direction:rtl;"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
             <td><span t-esc="t_untax" /> </td>

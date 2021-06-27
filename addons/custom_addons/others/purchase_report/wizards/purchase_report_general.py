@@ -74,13 +74,14 @@ class PurchaseReportVendor(models.TransientModel):
                          'unit' : move.product_uom.name ,
                         'car' : order.x_car_number,
                         'source' : order.partner_id.name,
+                        'partner_ref' : order.partner_ref ,
                         'dest' : order.picking_type_id.warehouse_id.name ,
                         'balance' : order.x_balance ,
                         'total' : order.amount_total ,
                         'untaxed' : order.amount_untaxed ,
                         'taxed' : order.amount_tax ,
                         'invoice' : invoice ,
-                        'stock' : stock
+                        'stock' : stock 
                     })
         
         datas = {
