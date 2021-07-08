@@ -111,7 +111,7 @@
 <span t-esc="order['product']" />
            </td>
 <td>
-<span t-esc="order['quantity']" />
+<span t-esc="round(order['quantity'],2)" />
 <t t-set="quantity" t-value="quantity+order['quantity']" />
 </td>
 <td>
@@ -125,15 +125,15 @@
            </td>
 <td>
 <span t-esc="order['picking']" />
-           </td>
+</td>
 <td>
 <span t-esc="order['source']" />
-           </td>
+</td>
 <td>
 <span t-esc="order['dest']" />
-           </td>
-           </tr>
-           
+</td>
+
+</tr>
            <tr>
            <td colspan="2">
            الإجمالي
@@ -141,15 +141,12 @@
            <td>
            <span t-esc="round(quantity, 2)" />
            </td>
-
           <td colspan="5"> 
            
            </td>
            </tr>
 
-
            </tbody>
-
                     </table>
                      
                 </div>

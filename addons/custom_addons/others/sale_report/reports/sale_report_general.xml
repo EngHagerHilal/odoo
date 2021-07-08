@@ -180,28 +180,28 @@
 <span t-esc="order['unit_price']" />
 </td>
 <td>
-<span t-esc="order['quantity']" />
+<span t-esc="round(order['quantity'],2)" />
 <t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
 
 </td>
 <td>
-<span t-esc="order['received']" />
+<span t-esc="round(order['received'],2)" />
 <t t-set="t_delivered" t-value="t_delivered+order['received']" />
 </td>
 
 
 <td>
-<span t-esc="order['price_sub']" />
+<span t-esc="round(order['price_sub'],2)" />
 <t t-set="t_untax" t-value="t_untax+order['price_sub']" />
 </td>
 
 <td>
-<span t-esc="order['price_tax']" />
+<span t-esc="round(order['price_tax'],2)" />
 <t t-set="t_tax" t-value="t_tax+order['price_tax']" />
 
 </td>
 <td>
-<span t-esc="order['price_total']" />
+<span t-esc="round(order['price_total'],2)" />
 <t t-set="t_total" t-value="t_total+order['price_total']" />
 </td>
 
@@ -214,11 +214,11 @@
            <tr>
             
             <td colspan="12"> الاجمالي  </td>
-            <td> <span t-esc="t_ordered" /> </td>
-            <td> <span t-esc="t_delivered" /> </td> 
-            <td> <span t-esc="t_untax" /> </td>
-            <td> <span t-esc="t_tax" /> </td>
-            <td> <span t-esc="t_total" /> </td>
+            <td> <span t-esc="round(t_ordered,2)" /> </td>
+            <td> <span t-esc="round(t_delivered,2)" /> </td> 
+            <td> <span t-esc="round(t_untax,2)" /> </td>
+            <td> <span t-esc="round(t_tax,2)" /> </td>
+            <td> <span t-esc="round(t_total,2)" /> </td>
             <td colspan="1"> </td>            
            </tr>
            </tbody>

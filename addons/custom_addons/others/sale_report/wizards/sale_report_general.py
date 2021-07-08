@@ -4,8 +4,8 @@ from odoo import models, fields, api, _
 class SaleReportGeneral(models.TransientModel):
     _name = 'sale.report.general'
 
-    start_date = fields.Datetime(string="Start Date", required=True)
-    end_date = fields.Datetime(string="End Date", required=True)
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
 
     driver = fields.Text(string='Driver')
     car_num = fields.Text(string='Car Number')
@@ -24,8 +24,8 @@ class SaleReportGeneral(models.TransientModel):
                 ('confirmation_date', '>=', self.start_date),
                 ('confirmation_date', '<=', self.end_date),
         ])
-        filtered_moves = orders 
-        #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
+        filtered_moves = sale_order 
+        filtered_moves = list(filter(lambda x: x.confirmation_date.date() >= self.start_date and x.confirmation_date.date() <= self.end_date,  filtered_moves))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
         if self.car_num : 
