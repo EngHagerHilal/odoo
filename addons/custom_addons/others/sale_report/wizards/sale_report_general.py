@@ -20,11 +20,8 @@ class SaleReportGeneral(models.TransientModel):
     def print_sale_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         sale_order = self.env['sale.order']
-        orders = sale_order.search([
-                ('confirmation_date', '>=', self.start_date),
-                ('confirmation_date', '<=', self.end_date),
-        ])
-        filtered_moves = sale_order 
+        
+        filtered_moves = sale_order.search() 
         filtered_moves = list(filter(lambda x: x.confirmation_date.date() >= self.start_date and x.confirmation_date.date() <= self.end_date,  filtered_moves))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver.name == self.driver , filtered_moves))
