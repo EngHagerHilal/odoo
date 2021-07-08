@@ -4,8 +4,8 @@ from odoo import models, fields, api, _
 class PurchaseReportVendor(models.TransientModel):
     _name = 'purchase.report.general'
 
-    start_date = fields.Datetime(string="Start Date", required=True)
-    end_date = fields.Datetime(string="End Date", required=True)
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
 
     driver = fields.Many2one('hr.employee' ,string='Driver' , domain=[('job_title', '=', 'سائق')] )
     car_num = fields.Text(string='Car Number')
@@ -21,12 +21,9 @@ class PurchaseReportVendor(models.TransientModel):
     def print_purchase_report(self):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         purchase_order = self.env['purchase.order']
-        orders = purchase_order.search([
-                ('date_order', '>=', self.start_date),
-                ('date_order', '<=', self.end_date),
-        ])
-        filtered_moves = orders 
-        #filtered_moves = list(filter(lambda x: x.date_done >= self.start_date and x.date_done <= self.end_date,  orders))
+        
+        filtered_moves = purchase_order 
+        filtered_moves = list(filter(lambda x: x.date_order.date() >= self.start_date and x.date_order.date() <= self.end_date,  filtered_moves))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver == self.driver , filtered_moves))
         if self.car_num : 

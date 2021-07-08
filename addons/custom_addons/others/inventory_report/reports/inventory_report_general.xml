@@ -139,7 +139,7 @@
            الإجمالي
            </td>
            <td>
-           <span t-esc="quantity" />
+           <span t-esc="round(quantity, 2)" />
            </td>
 
           <td colspan="5"> 

@@ -187,14 +187,14 @@
 <td>
 <span t-esc="order['received']" />
 <t t-set="t_delivered" t-value="t_delivered+order['received']" />
-
-           </td>
+</td>
 
 
 <td>
 <span t-esc="order['price_sub']" />
 <t t-set="t_untax" t-value="t_untax+order['price_sub']" />
-           </td>
+</td>
+
 <td>
 <span t-esc="order['price_tax']" />
 <t t-set="t_tax" t-value="t_tax+order['price_tax']" />
@@ -216,7 +216,7 @@
             <td colspan="12"> الاجمالي  </td>
             <td> <span t-esc="t_ordered" /> </td>
             <td> <span t-esc="t_delivered" /> </td> 
-            <td><span t-esc="t_untax" /> </td>
+            <td> <span t-esc="t_untax" /> </td>
             <td> <span t-esc="t_tax" /> </td>
             <td> <span t-esc="t_total" /> </td>
             <td colspan="1"> </td>            

@@ -171,26 +171,33 @@
 <td>
 <span t-esc="order['unit']" />
 </td>
+
 <td>
 <span t-esc="order['unit_price']" />
 </td>
+
 <td>
 <span t-esc="order['quantity']" />
 <t t-set="t_ordered" t-value="t_ordered+order['quantity']" />
 </td>
+
 <td>
 <span t-esc="order['received']" />
 <t t-set="t_delivered" t-value="t_delivered+order['received']" />
-           </td>
+</td>
 
 <td>
 <span t-esc="order['price_sub']" />
 <t t-set="t_untax" t-value="t_untax+order['price_sub']" />
-           </td>
+</td>
+
+    
+
 <td>
 <span t-esc="order['price_tax']" />
 <t t-set="t_tax" t-value="t_tax+order['price_tax']" />
-           </td>
+</td>
+
 <td>
 <span t-esc="order['price_total']" />
 <t t-set="t_total" t-value="t_total+order['price_total']" />

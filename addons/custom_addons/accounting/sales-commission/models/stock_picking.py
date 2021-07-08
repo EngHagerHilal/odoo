@@ -14,7 +14,7 @@ class StockPicking(models.Model):
     @api.depends('state')
     def compute_commission(self) :
         for record in self :
-            if (record.state == 'done' and record.picking_type_code == 'outcoming'):
+            if (record.state == 'done' and record.picking_type_code == 'outgoing'):
                 if record.move_lines :
                     count = 0
                     for move in record.move_lines :
