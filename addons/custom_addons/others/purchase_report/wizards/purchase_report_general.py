@@ -22,7 +22,7 @@ class PurchaseReportVendor(models.TransientModel):
         #purchase_order = self.env['purchase.order'].search([('x_car_number','=',self.car_num),('x_driver','=',self.driver),('date_order','>=' ,self.start_date), ('date_order', '<=' , self.end_date)])
         purchase_order = self.env['purchase.order']
         
-        filtered_moves = purchase_order 
+        filtered_moves = purchase_order.search([])
         filtered_moves = list(filter(lambda x: x.date_order.date() >= self.start_date and x.date_order.date() <= self.end_date,  filtered_moves))
         if self.driver :
             filtered_moves = list(filter(lambda x: x.x_driver == self.driver , filtered_moves))
